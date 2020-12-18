@@ -1,0 +1,344 @@
+2020-07-12 19:56:40,656:DEBUG:certbot._internal.main:certbot version: 1.6.0
+2020-07-12 19:56:40,656:DEBUG:certbot._internal.main:Arguments: ['--webroot', '-w', '/home/vamostrabalharjuntos/apps_wsgi/projetos/static', '-d', 'vamostrabalharjuntos.com.br', '--config-dir', '/home/vamostrabalharjuntos/apps_wsgi/projetos/static', '--work-dir', '/home/vamostrabalharjuntos/apps_wsgi/projetos/static', '--logs-dir', '/home/vamostrabalharjuntos/apps_wsgi/projetos/static']
+2020-07-12 19:56:40,656:DEBUG:certbot._internal.main:Discovered plugins: PluginsRegistry(PluginEntryPoint#manual,PluginEntryPoint#null,PluginEntryPoint#standalone,PluginEntryPoint#webroot)
+2020-07-12 19:56:40,680:DEBUG:certbot._internal.log:Root logging level set at 20
+2020-07-12 19:56:40,681:INFO:certbot._internal.log:Saving debug log to /home/vamostrabalharjuntos/apps_wsgi/projetos/static/letsencrypt.log
+2020-07-12 19:56:40,681:DEBUG:certbot._internal.plugins.selection:Requested authenticator webroot and installer None
+2020-07-12 19:56:40,685:DEBUG:certbot._internal.plugins.selection:Single candidate plugin: * webroot
+Description: Place files in webroot directory
+Interfaces: IAuthenticator, IPlugin
+Entry point: webroot = certbot._internal.plugins.webroot:Authenticator
+Initialized: <certbot._internal.plugins.webroot.Authenticator object at 0x7f3f7ffe4fd0>
+Prep: True
+2020-07-12 19:56:40,686:DEBUG:certbot._internal.plugins.selection:Selected authenticator <certbot._internal.plugins.webroot.Authenticator object at 0x7f3f7ffe4fd0> and installer None
+2020-07-12 19:56:40,686:INFO:certbot._internal.plugins.selection:Plugins selected: Authenticator webroot, Installer None
+2020-07-12 19:56:40,689:DEBUG:certbot._internal.main:Picked account: <Account(RegistrationResource(body=Registration(key=None, contact=(), agreement=None, status=None, terms_of_service_agreed=None, only_return_existing=None, external_account_binding=None), uri='https://acme-v02.api.letsencrypt.org/acme/acct/91182336', new_authzr_uri=None, terms_of_service=None), a5ff9683c7139c145dd9f9aab30df99a, Meta(creation_dt=datetime.datetime(2020, 7, 12, 22, 52, 33, tzinfo=<UTC>), creation_host='web7641.kinghost.net', register_to_eff='rdriesen@gmail.com'))>
+2020-07-12 19:56:40,690:DEBUG:acme.client:Sending GET request to https://acme-v02.api.letsencrypt.org/directory.
+2020-07-12 19:56:40,692:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): acme-v02.api.letsencrypt.org:443
+2020-07-12 19:56:41,406:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "GET /directory HTTP/1.1" 200 658
+2020-07-12 19:56:41,407:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Sun, 12 Jul 2020 22:56:41 GMT
+Content-Type: application/json
+Content-Length: 658
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "_6xiTFWTfJE": "https://community.letsencrypt.org/t/adding-random-entries-to-the-directory/33417",
+  "keyChange": "https://acme-v02.api.letsencrypt.org/acme/key-change",
+  "meta": {
+    "caaIdentities": [
+      "letsencrypt.org"
+    ],
+    "termsOfService": "https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf",
+    "website": "https://letsencrypt.org"
+  },
+  "newAccount": "https://acme-v02.api.letsencrypt.org/acme/new-acct",
+  "newNonce": "https://acme-v02.api.letsencrypt.org/acme/new-nonce",
+  "newOrder": "https://acme-v02.api.letsencrypt.org/acme/new-order",
+  "revokeCert": "https://acme-v02.api.letsencrypt.org/acme/revoke-cert"
+}
+2020-07-12 19:56:41,418:INFO:certbot._internal.main:Obtaining a new certificate
+2020-07-12 19:56:41,602:DEBUG:certbot.crypto_util:Generating key (2048 bits): /home/vamostrabalharjuntos/apps_wsgi/projetos/static/keys/0001_key-certbot.pem
+2020-07-12 19:56:41,606:DEBUG:certbot.crypto_util:Creating CSR: /home/vamostrabalharjuntos/apps_wsgi/projetos/static/csr/0001_csr-certbot.pem
+2020-07-12 19:56:41,607:DEBUG:acme.client:Requesting fresh nonce
+2020-07-12 19:56:41,607:DEBUG:acme.client:Sending HEAD request to https://acme-v02.api.letsencrypt.org/acme/new-nonce.
+2020-07-12 19:56:41,786:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "HEAD /acme/new-nonce HTTP/1.1" 200 0
+2020-07-12 19:56:41,787:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Sun, 12 Jul 2020 22:56:41 GMT
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0002glrHGQFtXz_aF5un2uuiht9kTZaDHsi35P8T6zPWo_o
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+
+2020-07-12 19:56:41,787:DEBUG:acme.client:Storing nonce: 0002glrHGQFtXz_aF5un2uuiht9kTZaDHsi35P8T6zPWo_o
+2020-07-12 19:56:41,788:DEBUG:acme.client:JWS payload:
+b'{\n  "identifiers": [\n    {\n      "type": "dns",\n      "value": "vamostrabalharjuntos.com.br"\n    }\n  ]\n}'
+2020-07-12 19:56:41,790:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/new-order:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvOTExODIzMzYiLCAibm9uY2UiOiAiMDAwMmdsckhHUUZ0WHpfYUY1dW4ydXVpaHQ5a1RaYURIc2kzNVA4VDZ6UFdvX28iLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL25ldy1vcmRlciJ9",
+  "signature": "GDc-MIwuvDrfsgrRElwcdDKw0Tt5v0sMcVKO7D5g9VfYowsD_AoMT9M3FHdR8QI_-10cCI6-BhqJGODmoL9tCni_KDv_hrL5H44HF7Y8DfcjI46FCEblrX76aoSzejAak4EF9z1IVAbe8Ol0O0nS-vpQ7PiMfNJBVFbmhgyspn9x0mxr18Dalm5aTGQR1zdshCPzbuWMlMm-nUrxfqt1oEMK_DeFJYOWYkpilZdPmmpvYK3qN1YFEUzcjpg0CRxM_9HjUoC0X4BJzCzg1rHJhy3JdVFjcC_zv4fU09PnsqNVG9i3siiqSdbPlE-guCJrXQtB1uA3DXCs-pluuEOuzA",
+  "payload": "ewogICJpZGVudGlmaWVycyI6IFsKICAgIHsKICAgICAgInR5cGUiOiAiZG5zIiwKICAgICAgInZhbHVlIjogInZhbW9zdHJhYmFsaGFyanVudG9zLmNvbS5iciIKICAgIH0KICBdCn0"
+}
+2020-07-12 19:56:42,918:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/new-order HTTP/1.1" 201 357
+2020-07-12 19:56:42,919:DEBUG:acme.client:Received response:
+HTTP 201
+Server: nginx
+Date: Sun, 12 Jul 2020 22:56:43 GMT
+Content-Type: application/json
+Content-Length: 357
+Connection: keep-alive
+Boulder-Requester: 91182336
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Location: https://acme-v02.api.letsencrypt.org/acme/order/91182336/4177596138
+Replay-Nonce: 0001F1MJdt_B2tZHrOF7mT2V4M-DDS3Yo-An1KuRjeP5_m0
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "status": "pending",
+  "expires": "2020-07-19T22:56:43.023415199Z",
+  "identifiers": [
+    {
+      "type": "dns",
+      "value": "vamostrabalharjuntos.com.br"
+    }
+  ],
+  "authorizations": [
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/5840432604"
+  ],
+  "finalize": "https://acme-v02.api.letsencrypt.org/acme/finalize/91182336/4177596138"
+}
+2020-07-12 19:56:42,919:DEBUG:acme.client:Storing nonce: 0001F1MJdt_B2tZHrOF7mT2V4M-DDS3Yo-An1KuRjeP5_m0
+2020-07-12 19:56:42,920:DEBUG:acme.client:JWS payload:
+b''
+2020-07-12 19:56:42,921:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/5840432604:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvOTExODIzMzYiLCAibm9uY2UiOiAiMDAwMUYxTUpkdF9CMnRaSHJPRjdtVDJWNE0tRERTM1lvLUFuMUt1UmplUDVfbTAiLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2F1dGh6LXYzLzU4NDA0MzI2MDQifQ",
+  "signature": "MZ2Gv8HGnogSVs_8FaYozbBSWcL_DaHK8igBqLSJdSuxW3KKOsVQDstZi_Nv514FYrt53ud3dJtsU9pedK83VZbwA3caDqSxoG81eOh6TO3ctECfFJnZNUR1B8kU-q_JpkHMGjz1XgwDb_cedstEQGcUs_4xNJO8Vzjo36q3i2Edz7gyORIt6D0T1XQVlQoURDu_VEQFtXNvAI9NoLBnzBaJ22DcosSoOlnWhyVbrg_RdiFZ93zAQyxqVOsVajj8TcIJmoSDU2Migy87pMMueD6VWp-1MIJmL_r2YWZ359XNiyTqFWiTAzACwFrxglzSrY3FNqCp2L8CD8JTBgUJSg",
+  "payload": ""
+}
+2020-07-12 19:56:43,201:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/5840432604 HTTP/1.1" 200 805
+2020-07-12 19:56:43,202:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Sun, 12 Jul 2020 22:56:43 GMT
+Content-Type: application/json
+Content-Length: 805
+Connection: keep-alive
+Boulder-Requester: 91182336
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0001UMipMt1dstBPNHTU8TdZDJGOpdZFdW5LubtnMS6N8EU
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "vamostrabalharjuntos.com.br"
+  },
+  "status": "pending",
+  "expires": "2020-07-19T22:56:43Z",
+  "challenges": [
+    {
+      "type": "http-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/ZkfC9Q",
+      "token": "UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs"
+    },
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/UTY32w",
+      "token": "UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs"
+    },
+    {
+      "type": "tls-alpn-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/JXzQEA",
+      "token": "UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs"
+    }
+  ]
+}
+2020-07-12 19:56:43,203:DEBUG:acme.client:Storing nonce: 0001UMipMt1dstBPNHTU8TdZDJGOpdZFdW5LubtnMS6N8EU
+2020-07-12 19:56:43,204:INFO:certbot._internal.auth_handler:Performing the following challenges:
+2020-07-12 19:56:43,204:INFO:certbot._internal.auth_handler:http-01 challenge for vamostrabalharjuntos.com.br
+2020-07-12 19:56:43,204:INFO:certbot._internal.plugins.webroot:Using the webroot path /home/vamostrabalharjuntos/apps_wsgi/projetos/static for all unmatched domains.
+2020-07-12 19:56:43,204:DEBUG:certbot._internal.plugins.webroot:Creating root challenges validation dir at /home/vamostrabalharjuntos/apps_wsgi/projetos/static/.well-known/acme-challenge
+2020-07-12 19:56:43,209:DEBUG:certbot._internal.plugins.webroot:Attempting to save validation to /home/vamostrabalharjuntos/apps_wsgi/projetos/static/.well-known/acme-challenge/UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs
+2020-07-12 19:56:43,209:INFO:certbot._internal.auth_handler:Waiting for verification...
+2020-07-12 19:56:43,210:DEBUG:acme.client:JWS payload:
+b'{}'
+2020-07-12 19:56:43,212:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/ZkfC9Q:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvOTExODIzMzYiLCAibm9uY2UiOiAiMDAwMVVNaXBNdDFkc3RCUE5IVFU4VGRaREpHT3BkWkZkVzVMdWJ0bk1TNk44RVUiLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2NoYWxsLXYzLzU4NDA0MzI2MDQvWmtmQzlRIn0",
+  "signature": "IcGuhCyjc5UUHyY-pnTFjbkSngDFOgdcdfZwcSxea5Qdn9vPTs5h0Q_wWP5EX7apj7Z6gAGhdIE4Nc8ShCisXtlYgpH28msRVMxrmOIwALwsE-vHSfnat1HyO1jTz42h4NiKrufIvPKib8va-105gtEcn1fhE1qwlBTxxyt3UN724p4n9Pdeqq4eMzIGsL9MTCsCFav2r9Nnc6iCwNzFpbvi78Q7MymrRHWdnc8g4IXFfRnm1pqpVlUpWlRLlpul6SQG0jLACqLivBePbiypts8H_xqtCAHMWq-e6yWhGXuJPaeW8S94a3clbjHUnq8AF-R07PYCQqX0cfMvmvRzpw",
+  "payload": "e30"
+}
+2020-07-12 19:56:43,476:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/chall-v3/5840432604/ZkfC9Q HTTP/1.1" 200 185
+2020-07-12 19:56:43,477:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Sun, 12 Jul 2020 22:56:43 GMT
+Content-Type: application/json
+Content-Length: 185
+Connection: keep-alive
+Boulder-Requester: 91182336
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index", <https://acme-v02.api.letsencrypt.org/acme/authz-v3/5840432604>;rel="up"
+Location: https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/ZkfC9Q
+Replay-Nonce: 0001AYtTcJh9rqGZeGpmpDEsTmc9m5_tgu8R83pY0eafZ1g
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "type": "http-01",
+  "status": "pending",
+  "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/ZkfC9Q",
+  "token": "UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs"
+}
+2020-07-12 19:56:43,477:DEBUG:acme.client:Storing nonce: 0001AYtTcJh9rqGZeGpmpDEsTmc9m5_tgu8R83pY0eafZ1g
+2020-07-12 19:56:44,482:DEBUG:acme.client:JWS payload:
+b''
+2020-07-12 19:56:44,484:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/5840432604:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvOTExODIzMzYiLCAibm9uY2UiOiAiMDAwMUFZdFRjSmg5cnFHWmVHcG1wREVzVG1jOW01X3RndThSODNwWTBlYWZaMWciLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2F1dGh6LXYzLzU4NDA0MzI2MDQifQ",
+  "signature": "aTW7ESXG0EVpW429KfYvSFchxe2Vd1JsRQM4vfRqRNyNBzSvsuObXf33eWonVAMJJdp4P5IRMycYw3c-BG9vbGemvHjcTgmmN50GDDq_Vmw2H50aXjCNMXjV1Guv8D6x35cF--UKE1q_onrpbzztKpFEjE-gNf6zeJknZXPYON5QAOnOdlxZqJoeXFt6X1US1XrBeTcwl7sxKIOYrT2ZqaUdOhubI9RSR4qSuOW4oQtS8NwxSdh3PD_jzwu5b1bajzBiqOTDEH2a8dIE0V5Dgaucxf_3jTTbr7bTkZ-k1d_xnafIfNyuGIZWJuHfnmgYDaQlKUKyn4HlcpEkDn6scw",
+  "payload": ""
+}
+2020-07-12 19:56:44,696:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/5840432604 HTTP/1.1" 200 805
+2020-07-12 19:56:44,696:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Sun, 12 Jul 2020 22:56:44 GMT
+Content-Type: application/json
+Content-Length: 805
+Connection: keep-alive
+Boulder-Requester: 91182336
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0001hgNBQXIgRuRwF_5tA0wTyyrv-3KMXEWmIvinZw0DMdQ
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "vamostrabalharjuntos.com.br"
+  },
+  "status": "pending",
+  "expires": "2020-07-19T22:56:43Z",
+  "challenges": [
+    {
+      "type": "http-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/ZkfC9Q",
+      "token": "UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs"
+    },
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/UTY32w",
+      "token": "UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs"
+    },
+    {
+      "type": "tls-alpn-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/JXzQEA",
+      "token": "UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs"
+    }
+  ]
+}
+2020-07-12 19:56:44,697:DEBUG:acme.client:Storing nonce: 0001hgNBQXIgRuRwF_5tA0wTyyrv-3KMXEWmIvinZw0DMdQ
+2020-07-12 19:56:47,701:DEBUG:acme.client:JWS payload:
+b''
+2020-07-12 19:56:47,704:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/5840432604:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvOTExODIzMzYiLCAibm9uY2UiOiAiMDAwMWhnTkJRWElnUnVSd0ZfNXRBMHdUeXlydi0zS01YRVdtSXZpblp3MERNZFEiLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2F1dGh6LXYzLzU4NDA0MzI2MDQifQ",
+  "signature": "Y9MFAYt47kkp92D9gKRq6lzg8RyRMwMfj1iNbI88oazLYqglU_XyuvAncnI4wkDYoehhIfcZ0K9vallbgvM1hOHuSbCiDuCX8yz4ZnKsuaaNGwUdWahToIDNFdrgjzwjX8DFCUEA7iY6TDblf6NEQqk3x_NrU90DANBY6Vybx7q3D6TMCJP4eijGKF-XTpFDdasium81nxGMUxfoc0aCU_05AkQ5VdV6D4FnEj75yFPhToPW47pjy2wmtDmZe5irafkGh_q7yqkl6YN1UBQdOo7QisdIEpIMwWxmp7ooq1CiUdDuycLxRe0bZQLwf7cdP8g_rCwds9e0QGlV4r0F7g",
+  "payload": ""
+}
+2020-07-12 19:56:48,023:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/5840432604 HTTP/1.1" 200 1222
+2020-07-12 19:56:48,024:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Sun, 12 Jul 2020 22:56:48 GMT
+Content-Type: application/json
+Content-Length: 1222
+Connection: keep-alive
+Boulder-Requester: 91182336
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0002hXC8akXsV4kG-prA2gK-izw0SVw5f6yJqbwB218FlFo
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "vamostrabalharjuntos.com.br"
+  },
+  "status": "invalid",
+  "expires": "2020-07-19T22:56:43Z",
+  "challenges": [
+    {
+      "type": "http-01",
+      "status": "invalid",
+      "error": {
+        "type": "urn:ietf:params:acme:error:unauthorized",
+        "detail": "Invalid response from http://vamostrabalharjuntos.com.br/.well-known/acme-challenge/UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs [191.6.204.17]: \"\u003chtml\u003e\\n\\n\u003chead\u003e\\n\u003cmeta http-equiv=\\\"Content-Language\\\" content=\\\"pt-br\\\"\u003e\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=\"",
+        "status": 403
+      },
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/5840432604/ZkfC9Q",
+      "token": "UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs",
+      "validationRecord": [
+        {
+          "url": "http://vamostrabalharjuntos.com.br/.well-known/acme-challenge/UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs",
+          "hostname": "vamostrabalharjuntos.com.br",
+          "port": "80",
+          "addressesResolved": [
+            "191.6.204.17"
+          ],
+          "addressUsed": "191.6.204.17"
+        }
+      ]
+    }
+  ]
+}
+2020-07-12 19:56:48,024:DEBUG:acme.client:Storing nonce: 0002hXC8akXsV4kG-prA2gK-izw0SVw5f6yJqbwB218FlFo
+2020-07-12 19:56:48,024:WARNING:certbot._internal.auth_handler:Challenge failed for domain vamostrabalharjuntos.com.br
+2020-07-12 19:56:48,024:INFO:certbot._internal.auth_handler:http-01 challenge for vamostrabalharjuntos.com.br
+2020-07-12 19:56:48,025:DEBUG:certbot._internal.reporter:Reporting to user: The following errors were reported by the server:
+
+Domain: vamostrabalharjuntos.com.br
+Type:   unauthorized
+Detail: Invalid response from http://vamostrabalharjuntos.com.br/.well-known/acme-challenge/UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs [191.6.204.17]: "<html>\n\n<head>\n<meta http-equiv=\"Content-Language\" content=\"pt-br\">\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset="
+
+To fix these errors, please make sure that your domain name was entered correctly and the DNS A/AAAA record(s) for that domain contain(s) the right IP address.
+2020-07-12 19:56:48,025:DEBUG:certbot._internal.error_handler:Encountered exception:
+Traceback (most recent call last):
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/auth_handler.py", line 91, in handle_authorizations
+    self._poll_authorizations(authzrs, max_retries, best_effort)
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/auth_handler.py", line 180, in _poll_authorizations
+    raise errors.AuthorizationError('Some challenges have failed.')
+certbot.errors.AuthorizationError: Some challenges have failed.
+
+2020-07-12 19:56:48,025:DEBUG:certbot._internal.error_handler:Calling registered functions
+2020-07-12 19:56:48,025:INFO:certbot._internal.auth_handler:Cleaning up challenges
+2020-07-12 19:56:48,025:DEBUG:certbot._internal.plugins.webroot:Removing /home/vamostrabalharjuntos/apps_wsgi/projetos/static/.well-known/acme-challenge/UzpXF3Limp5m9NFVjPShCZat3WfZrwWvwoA7WcIEahs
+2020-07-12 19:56:48,026:DEBUG:certbot._internal.plugins.webroot:All challenges cleaned up
+2020-07-12 19:56:48,026:DEBUG:certbot._internal.log:Exiting abnormally:
+Traceback (most recent call last):
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/bin/certbot", line 8, in <module>
+    sys.exit(main())
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/main.py", line 15, in main
+    return internal_main.main(cli_args)
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/main.py", line 1353, in main
+    return config.func(config, plugins)
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/main.py", line 1237, in certonly
+    lineage = _get_and_save_cert(le_client, config, domains, certname, lineage)
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/main.py", line 121, in _get_and_save_cert
+    lineage = le_client.obtain_and_enroll_certificate(domains, certname)
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/client.py", line 418, in obtain_and_enroll_certificate
+    cert, chain, key, _ = self.obtain_certificate(domains)
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/client.py", line 351, in obtain_certificate
+    orderr = self._get_order_and_authorizations(csr.data, self.config.allow_subset_of_names)
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/client.py", line 398, in _get_order_and_authorizations
+    authzr = self.auth_handler.handle_authorizations(orderr, best_effort)
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/auth_handler.py", line 91, in handle_authorizations
+    self._poll_authorizations(authzrs, max_retries, best_effort)
+  File "/home/vamostrabalharjuntos/apps_wsgi/projetos/virtual_env/lib/python3.7/site-packages/certbot/_internal/auth_handler.py", line 180, in _poll_authorizations
+    raise errors.AuthorizationError('Some challenges have failed.')
+certbot.errors.AuthorizationError: Some challenges have failed.
+2020-07-12 19:56:48,027:ERROR:certbot._internal.log:Some challenges have failed.

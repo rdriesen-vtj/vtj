@@ -1,0 +1,1402 @@
+
+/* -------------------------------------------------------------------------------- */
+/*	1. Document Setup
+/* -------------------------------------------------------------------------------- */
+
+body {
+  background: #fff;
+  border: none;
+  color: #000;
+  font-size: 18px;
+  background-image: url("https://vamostrabalharjuntos.com.br/projetos/static/images/back-airborne-light.png") !important;
+  background-position: left top !important;
+  background-size: auto !important;
+  background-repeat: repeat !important;
+  background-attachment: scroll !important;
+  background-color: #dddddd;
+}
+
+body * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: Georgia, serif;
+}
+
+html {
+  margin-top: 32px !important;
+}
+
+* html body {
+  margin-top: 32px !important;
+}
+
+@media screen and ( max-width: 782px ) {
+  html {
+    margin-top: 46px !important;
+      }
+  * html body {
+    margin-top: 46px !important;
+  }                       
+}
+
+a {
+	text-decoration: none;
+  color: #09769e;
+}
+
+a:hover,
+a:active,
+a:focus,
+header .site-title a:hover{
+  color: #000;
+  text-decoration: underline;
+}
+
+footer a:link,
+footer a:hover,
+footer a:visited{
+  color: #fff;
+}
+
+img {
+	display: block;
+	height: auto;
+    max-width: 100%;
+}
+
+iframe {
+	display: block;
+	width: 100%;
+}
+
+.clear { clear: both; }
+
+::selection {
+	background: #000;
+	color: #FFF;
+}
+
+input::-webkit-input-placeholder { color: #767676; }
+input:-ms-input-placeholder { color: #767676; }
+input::-moz-placeholder { color: #767676; }
+
+/* -------------------------------------------------------------------------------- */
+/*	2.	Structure
+/* -------------------------------------------------------------------------------- */
+
+
+.wrapper {
+  margin: 0 auto;
+  width: 95%;
+}
+
+.wpcake-full-width .wrapper{
+  width: 95%;
+}
+
+.wrapper:after,
+.wpcake-blog-default .post:after{
+  content:"";
+  display: table;
+  clear: both;
+}
+
+/* -------------------------------------------------------------------------------- */
+/*	3.	Header
+/* -------------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------------- */
+/*	3.1 	Top Bar
+/* -------------------------------------------------------------------------------- */
+.top-bar-wrap{
+  position: relative;
+  z-index: 100;
+  font-size: 85%;
+}
+.top-bar{
+  border-bottom: 1px solid #ccc;
+}
+.top-bar-inner{
+  width: 95%;
+  overflow: hidden;
+  clear: both;
+  padding: 8px 0;
+  margin: 0 auto;
+  position: relative;
+  background-image: url("https://vamostrabalharjuntos.com.br/projetos/static/back-airborne-light.png");
+  background-position: left top;
+  background-size: auto;
+  background-repeat: repeat;
+  background-attachment: scroll;
+}
+
+/* -------------------------------------------------------------------------------- */
+/*	3.2 	Primary Header
+/* -------------------------------------------------------------------------------- */
+header {
+  width: 100%;
+  clear: both;
+  display: table;
+  margin-bottom: 100px;
+  z-index: 99998;
+  position: relative;
+  background-color: transparent;
+}
+
+header .header-inner{
+  width: 95%;
+  margin: 0 auto;
+}
+
+header .site-title {
+  font-size: 1.5em;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+nav {
+	float:right;
+  margin: 30px 0 0;
+}
+
+.site-identity{
+  padding: 15px 0;
+  overflow: hidden;
+}
+
+.custom-logo-link{
+  display: inline-block;
+}
+
+.toggle-menu {
+	background-color: #dddddd;
+  background-image: url("https://vamostrabalharjuntos.com.br/projetos/static/back-airborne-light.png");
+	border-radius: 0;
+	box-shadow: none;
+	font-size: 14px;
+	letter-spacing: 1px;
+	margin: 30px auto 0 auto;
+	text-transform: uppercase;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+.show-menu .toggle-menu {
+	text-decoration: line-through;
+}
+
+.menu {
+	text-align: center;
+}
+
+@media ( min-width: 790px ) {
+
+  .site-identity{ float: left; }
+
+  .toggle-menu { display: none; }
+
+  .custom-mobile-logo-link{
+    display:none;
+  }
+
+  nav ul li { position: relative; }
+  nav ul > li { display: inline-block; }
+  nav ul > li + li { margin-left: 30px; }
+  nav ul ul > li + li { margin-left: 0px; }
+
+  nav ul .page_item_has_children > a:after,
+  nav ul .menu-item-has-children > a:after {
+    content: " ↓";
+    font-family: 'Helvetica', sans-serif;
+  }
+
+  nav ul ul .page_item_has_children > a:after,
+  nav ul ul .menu-item-has-children > a:after {
+    content: " ↓";
+    font-family: 'Helvetica', sans-serif;
+  }
+
+  nav ul ul {
+    position: absolute;
+    left: -10000px;
+    top: 15px;
+    width: 200px;
+    z-index: 999999;
+  }
+  ul.js-showElement{
+    left: 0;
+  }
+  ul ul ul.js-showElement{
+    margin-left: 150px;
+  }
+
+  nav ul > li > ul {
+    font-size: 0.9em;
+    padding-top: 20px;
+  }
+
+  nav ul ul li{
+    width: 100%;
+  }
+  nav ul ul a,
+  nav ul ul a:visited {
+    background: #000;
+    color: #fff;
+    display: block;
+    padding: 15px;
+    text-align: center;
+  }
+
+  nav ul ul a:hover {
+    color: #09769e;
+  }
+
+  nav ul ul li ul {
+    margin: 0;
+    padding-left: 20px;
+    top: 0;
+    width: 200px;
+  }
+
+	nav ul ul li:hover > ul,
+	nav ul ul ul.focusable {
+    margin-left: 200px;
+    padding-left: 0;
+  }
+
+  footer .wpcake-split{
+    clear: both;
+    overflow: hidden;
+    display: table;
+  }
+  footer .wpcake-split .section_one{
+    float: left;
+    text-align: left;
+  }
+  footer .wpcake-split .section_two{
+    float: right;
+    text-align: right;
+  }
+
+}
+
+/* Right Primary Header Layout */
+.wpcake-header-right nav{
+  float:left;
+}
+.wpcake-header-right .site-identity{
+  float:right;
+  text-align: right;
+}
+.wpcake-header-right .site-title,
+.wpcake-header-right .site-description{
+  text-align: right;
+}
+
+/* Center Primary Header Layout */
+.wpcake-header-center nav{
+  float: none;
+  margin-bottom: 30px;
+}
+.wpcake-header-center .site-identity{
+  float:none;
+  text-align: center;
+}
+.wpcake-header-center .site-title,
+.wpcake-header-center .site-description{
+  text-align: center;
+}
+
+/* -------------------------------------------------------------------------------- */
+/*	4.	Blog
+/* -------------------------------------------------------------------------------- */
+
+
+main:before,
+.comments:before,
+.comment-respond:before,
+.comments .comment-respond:after,
+.pagination:before,
+footer:before {
+    background-size: auto 100%;
+    content: "";
+    display: block;
+}
+
+.entry-title {
+  line-height: 1.4;
+	text-align: center;
+}
+
+.featured-image {
+    display: block;
+    margin: 0 auto 30px auto;
+}
+
+.meta {
+    color: #767676;
+	margin-top: 30px;
+}
+
+main .meta p {
+	line-height: 1.55;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+span.sep { margin: 0 15px; }
+
+.meta p + p { margin-top: 15px; }
+
+.meta a,
+.meta a:hover { color: #767676; }
+
+.sticky-post {
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 1em 0 1em;
+  display: block;
+}
+
+/* -------------------------------------------------------------------------------- */
+/*	5.	Post Content
+/* -------------------------------------------------------------------------------- */
+
+.content-area{
+  width: 70%;
+  float:left;
+  padding-right: 60px;
+}
+
+.content-inner {
+  background-image: url("https://vamostrabalharjuntos.com.br/projetos/static/back-airborne-light.png");
+  background-position: left top; background-size: auto; background-repeat: repeat; background-attachment: scroll;
+}
+
+.left-sidebar .content-area{
+  float:right;
+  padding-right: 0;
+  padding-left: 60px;
+}
+
+.blog.wpcake-blog-default  .post,
+.archives.wpcake-blog-default  .post,
+.search.wpcake-blog-default  .post{
+  margin-bottom: 160px;
+}
+
+.blog.wpcake-blog-grid .post{
+  width: 48%;
+  border: 2px solid #999;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-bottom: 30px;
+}
+
+.sidebar-primary{
+  width: 30%;
+  float: right;
+}
+
+.left-sidebar .sidebar-primary{
+  float: left;
+}
+
+.sidebar-box{
+  margin-bottom: 60px;
+}
+
+em {
+    font-style: italic;
+}
+
+main p {
+	line-height: 1.55;
+	margin-bottom: 30px;
+}
+
+main p:last-child { margin-bottom: 0; }
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+    font-weight: 700;
+	margin-bottom: 30px;
+}
+
+main hr {
+	border: none;
+	margin: 40px 0;
+    text-align: center;
+}
+
+main hr:before { content: "***"; }
+
+.content > ol,
+.content > ul {
+    margin-bottom: 30px;
+}
+
+main ol,
+main ul {
+    margin-left: 1.5rem;
+    display:inline;
+}
+
+main ul { list-style: none; }
+main ul ul { list-style: circle; }
+main ul ul ul { list-style: square; }
+
+main ol { list-style: decimal; }
+main ol ol { list-style: lower-alpha; }
+main ol ol ol { list-style: lower-roman; }
+
+main li {
+  line-height: 1.5;
+	margin-top: 0.5em;
+  display:inline;
+}
+
+dd,
+dt {
+	line-height: 1.5;
+}
+
+dd + dt { margin-top: 15px; }
+
+pre {
+	font-family: Menlo, monospace;
+	font-size: 0.9em;
+	line-height: 1.5;
+	white-space: pre-wrap;       /* css-3 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.has-small-font-size {
+  font-size: 13px
+}
+.has-normal-font-size,.has-regular-font-size {
+  font-size: 16px
+}
+.has-medium-font-size {
+  font-size: 20px
+}
+.has-big-font-size {
+  font-size: 24px
+}
+.has-large-font-size {
+  font-size: 36px
+}
+.has-huge-font-size,.has-larger-font-size {
+  font-size: 42px
+}
+.has-text-align-center {
+  text-align: center
+}
+.has-text-align-left {
+  text-align: left
+}
+.has-text-align-right {
+  text-align: right
+}
+
+.aligncenter .wp-caption-text { text-align: center; }
+.alignright .wp-caption-text { text-align: right; }
+
+
+
+/* Inputs ----------------------------- */
+
+.size-auto,
+.size-full,
+.size-large,
+.size-medium,
+.size-thumbnail {
+  max-width: 100%;
+  height: auto;
+}
+
+fieldset {
+  border: 1px solid #ddd;
+	padding: 25px;
+}
+
+fieldset legend {
+    font-size: 0.9em;
+    font-style: italic;
+	padding: 0 15px;
+}
+
+label {
+	font-size: 0.9em;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+textarea,
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="tel"],
+input[type="text"],
+input[type="url"] {
+  border: 1px solid #ddd;
+  color: #000;
+  display: block;
+  font-size: 0.9em;
+  margin: 0 0 15px 0;
+  padding: 15px;
+  width: 100%;
+}
+
+textarea {
+  line-height: 1.5;
+  height: 200px;
+}
+
+input.button,
+input[type="button"],
+input[type="submit"],
+button[type="submit"] {
+  color:#ffffff;
+  background: #000;
+  border: none;
+  border-radius:28px;
+  box-shadow:none;
+  cursor:pointer;
+  display: inline-block;
+  font-size:18px;
+  line-height: 1;
+  margin:0;
+  padding: 14px 24px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  text-align:center;
+  text-decoration:none;
+  overflow-wrap:break-word;
+}
+
+input.button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+button[type="submit"]:hover {
+  background: #767676;
+}
+
+/* Tables ----------------------------- */
+
+table {
+	border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    font-size: 0.9em;
+    margin-bottom: 30px;
+    max-width: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+th,
+td {
+    line-height: 1.4;
+	margin: 0;
+	overflow: visible;
+    padding: 2.5%;
+}
+
+caption {
+    border-bottom: 1px solid #ddd;
+	font-size: 13px;
+	font-weight: 700;
+    padding-bottom: 2.5%;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+thead {
+	vertical-align: bottom;
+	white-space: nowrap;
+}
+
+th {
+	border-bottom: 1px solid #ddd;
+	font-weight: 700;
+}
+
+tbody > tr:nth-child(even) { background-color: #f6f6f6; }
+
+/* -------------------------------------------------------------------------------- */
+/*	8.	Footer
+/* -------------------------------------------------------------------------------- */
+
+
+footer {
+  color: #fff;
+  line-height: 1.6;
+	padding: 40px 0 40px;
+	text-align: center;
+  clear: both;
+  position: relative;
+  background-color: #2d2d2d;
+  border-top: 1px solid #6f6f6f;
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: auto;
+  background-attachment: scroll;
+}
+
+.footer-inner{
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+footer p + p {
+    font-style: italic;
+    margin-top: 15px;
+}
+
+.footer-widgets{
+  color: #fff;
+  background-color: #3a3a3a;
+  border-top: 7px solid #6f6f6f;
+  overflow: hidden;
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: auto;
+  background-attachment: scroll;
+}
+.footer-widgets .footer-inner{
+  margin: 70px auto;
+  overflow: hidden;
+  clear: both;
+}
+.footer-widgets .widget-title{
+  color: #eaeaea;
+}
+
+.footer-widgets .widget-area{
+  width: 25%;
+  padding: .25em 1em;
+  float:left;
+}
+.footer-widgets .widget-area table{
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------------------- */
+/*	9.	Media Queries
+/* -------------------------------------------------------------------------------- */
+
+
+@media ( max-width: 789px ) {
+
+  body {
+    font-size: 16px;
+  }
+
+  header {
+    background-color: #fff;
+  }
+
+  header .header-inner{
+    width: 100%;
+  }
+
+  .has-mobile-logo .custom-logo-link{
+    display: none;
+  }
+
+  header .site-identity{
+    float:left;
+    margin-left: 20px;
+    max-width: 40%;
+  }
+
+  .toggle-menu {
+    display: block;
+    float:right;
+    margin-right: 40px;
+    cursor: pointer;
+  }
+
+  header nav{
+    clear: both;
+    border-width: 1px 0 0;
+    border-style: solid;
+    border-color: #eaeaea;
+    background: #f9f9f9;
+  }
+
+  header nav {
+    display: none;
+    margin: 20px 0 0;
+  }
+  .show-menu header nav{
+    display: block;
+  }
+
+  nav *{
+    line-height: 2;
+  }
+
+  nav a{
+    padding: 10px 20px;
+    display: inline-block;
+    width: 100%;
+    border-width: 0px 0px 1px;
+    border-style: solid;
+    border-color: #eaeaea;
+  }
+
+  nav ul li {
+      line-height: 1.5;
+      text-align: left;
+      margin: 2px 0;
+  }
+
+  nav ul li li {
+    text-indent: 20px;
+  }
+  
+  header nav ul ul a{
+    background-color: #f9f9f9;
+    list-style-type: square;
+  }
+  
+  header nav ul ul a
+
+  .show-menu nav { display: block; }
+
+  header { margin-bottom: 40px; }
+
+  header h2 { margin-top: 40px; }
+
+  main:before,
+  .comments:before,
+  .comment-respond:before,
+  .comments .comment-respond:after,
+  .pagination:before,
+  footer:before {
+      margin: 50px auto;
+  }
+
+  .featured-image {
+      margin-left: -50vw;
+      position: relative;
+          left: 50%;
+      width: 100vw;
+  }
+
+  .content-area,
+  .sidebar-primary,
+  .content-area{
+    width: 100%;
+    float:none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  nav{
+    float: none;
+  }
+
+  span.sep { margin: 0 10px; }
+
+  .pagination a + a { margin-left: 20px; }
+
+  footer { padding-bottom: 50px; }
+  
+  
+
+  .footer-widgets .widget-area{
+    width: 50%;
+    padding: .25em 1em;
+    float:left;
+  }
+  header .custom-mobile-logo-link .custom-mobile-logo {
+    background-image: url("https://vamostrabalharjuntos.com.br/projetos/static/back-airborne-light.png");
+    background-position: left top;
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    height: 100px !important;
+    width: 100px !important;
+  }
+  img {
+    display: block;
+    height: 32px;
+    width: 32px;
+  }
+}
+
+/* -------------------------------------------------------------------------------- */
+/*	8.	Social Media Icons
+/* -------------------------------------------------------------------------------- */
+.menu-social ul li{
+  display: inline-block;
+  margin: 0 0 0 -4px;
+}
+.menu-social ul li a {
+  display: block;
+  margin: 0 4px;
+  width: 100%;
+}
+.menu-social ul li a:before {
+  display: inline-block;
+  vertical-align: top;
+  font-family: 'Fontawesome';
+  padding: 0 4px;
+  -webkit-font-smoothing: antialiased;
+  content: '\f08e';
+}
+.menu-social li a[href*="dribbble.com"]::before {
+  content: '\f17d';
+}
+
+.menu-social li a[href*="facebook.com"]::before {
+  content: '\f09a';
+}
+
+.menu-social li a[href*="flickr.com"]::before {
+  content: '\f16e';
+}
+
+.menu-social li a[href*="foursquare.com"]::before {
+  content: '\f180';
+}
+
+.menu-social li a[href*="github.com"]::before {
+  content: '\f09b';
+}
+
+.menu-social li a[href*="plus.google.com"]::before {
+  content: '\f0d5';
+}
+
+.menu-social li a[href*="instagram.com"]::before {
+  content: '\f16d';
+}
+
+.menu-social li a[href*="jsfiddle.com"]::before {
+  content: '\f1cc';
+}
+
+.menu-social li a[href*="linkedin.com"]::before {
+  content: '\f0e1';
+}
+
+.menu-social li a[href*="pinterest.com"]::before {
+  content: '\f0d2';
+}
+
+.menu-social li a[href*="reddit.com"]::before {
+  content: '\f1a1';
+}
+
+.menu-social li a[href*="soundcloud.com"]::before {
+  content: '\f1be';
+}
+
+.menu-social li a[href*="stackoverflow.com"]::before {
+  content: '\f16c';
+}
+
+.menu-social li a[href*="tumblr.com"]::before {
+  content: '\f173';
+}
+
+.menu-social li a[href*="twitter.com"]::before {
+  content: '\f099';
+}
+
+.menu-social li a[href*="vimeo.com"]::before {
+  content: '\f194';
+}
+
+.menu-social li a[href*="vine.co"]::before {
+  content: '\f1ca';
+}
+
+.menu-social li a[href*="yelp.com"]::before {
+  content: '\f1e9';
+}
+
+.menu-social li a[href*="youtube.com"]::before {
+  content: '\f167';
+}
+
+.menu-social li a[href*="wordpress.com"]::before {
+  content: '\f19a';
+}
+
+.menu-social li a[href*="tripadvisor.com"]::before {
+  content: '\f262';
+}
+
+/* GLOBAL */
+.entry-title {
+  font-size: 26px;
+	text-align: left;
+	margin-bottom: 10px;
+}
+.sidebar-primary ul {
+  list-style: none;
+	margin-left: 0;
+}
+.sidebar-primary h1, .sidebar-primary h2, .sidebar-primary h3, .sidebar-primary h4, .sidebar-primary h5, .sidebar-primary h6 {
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 8px;
+}
+
+/* -------------------------------------------------------------------------------- */
+/*	NEW STyLES
+/* -------------------------------------------------------------------------------- */
+
+
+/* BLOG */
+
+.hentry {
+    margin: 0 0 3.5em 0;
+    border: 1px solid #EFEFEF;
+    border-radius: 0.2em;
+    -webkit-box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+    clear: both;
+    position: relative;
+	  padding: 1.5em;
+}
+
+main .meta p {
+	text-align: left;
+}
+.meta {
+    margin: 2px 0 20px 0;
+	font-size: 12px;
+}
+.meta a, .meta a:hover {
+    color: #767676 !important;
+}
+span.sep {
+    margin: 0 5px;
+}
+
+main .comment-reply-title {
+    text-align: left;
+}
+
+.hentry .entry-title{
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 8px;
+}
+
+/* NOVOS PARA O PROJETO VAMOS TRABALHAR JUNTOS */
+
+.papel {
+  margin: 0 0 3.5em 0;
+  border: 1px solid #EFEFEF;
+  border-radius: 0.2em;
+  -webkit-box-shadow: 0 5px 12px rgba(0, 0, 0, 0.36);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.36);
+  clear: both;
+  position: relative;
+}
+
+.star {
+      width: 40px;
+      height: auto;
+      padding: 0px 0px 0px 0px;
+}
+
+.usercropcircle {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background: #eee no-repeat center;
+      background-size: cover;
+}
+
+.reply {
+      position: relative;
+      float: right;
+      margin-top: -80px;
+      margin-left: 20px;;
+}
+
+.send {
+  padding: 0px 10px 0px;
+  text-align:right;
+  background-color: #b5e7a0;
+}
+
+.receive {
+  padding: 0px 10px 0px;
+  text-align:right;
+  background-color: #dddddd;
+}
+
+.usercropcircle{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: #eee no-repeat center;
+  background-size: cover;
+}
+
+.projeto {
+  margin: 0 0 3.5em 0;
+  border: 1px solid #EFEFEF;
+  border-radius: 0.2em;
+  -webkit-box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+  clear: both;
+  position: relative;
+  padding: 1.5em;
+  background-color: #EFEFEF;
+  background-image: url("https://vamostrabalharjuntos.com.br/projetos/static/back-airborne-light.png");
+  background-position: left top; background-size: auto; background-repeat: repeat; background-attachment: scroll;
+}
+
+no----aside {
+  display:inline;
+}
+.avatar {
+  vertical-align:middle;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+}
+.avatar2 {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+  -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+  box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+}
+.avatar3 {
+  width:150px;
+  height:150px;
+  margin: 25px auto;
+  overflow: hidden;
+  border-radius:50%;
+  position: relative;
+}
+.avatar3 img {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%)
+}
+.cropcircle {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  background: #eee no-repeat center;
+  background-size: cover;
+}
+.cropcircle40{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: #eee no-repeat center;
+  background-size: cover;
+}
+.body.custom-background {
+  background-image: url("https://vamostrabalharjuntos.com.br/projetos/static/back-airborne-light.png");
+  background-position: left top;
+  background-size: auto;
+  background-repeat: repeat;
+  background-attachment: scroll;
+}
+
+/* FONTS */
+
+body *{
+  font-family: PT Sans Narrow;
+}
+h1,h2,h3,h4,h5,h6,
+h1 *,h2 *,h3 *,h4 *,h5 *,h6 *{
+  font-family: PT Sans Narrow;
+}
+header .site-title,
+header .site-title a{
+  font-family: Open Sans Condensed;
+}
+header nav *,
+.toggle-menu{
+  font-family:PT Sans Narrow;
+}
+
+/* PARA AJUSTAR ACIMA */
+
+
+div.flash-msg {
+                                color: #FF0000;
+                                padding: 20px 100px 20px 150px;
+                        }
+                    table {
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                empty-cells: show;
+                                font-size: 0.9em;
+                                margin-bottom: 30px;
+                                max-width: 100%;
+                                overflow: hidden;
+                                width: 100%;
+                        }
+                        th,
+                        td {
+                                line-height: 1;
+                                margin: 0;
+                                overflow: visible;
+                                padding: 2.5%;
+                        }
+                        caption {
+                                border-bottom: 1px solid #ddd;
+                                font-size: 13px;
+                                font-weight: 700;
+                                padding-bottom: 2.5%;
+                                text-align: center;
+                                text-transform: uppercase;
+                        }
+                        thead {
+                                vertical-align: bottom;
+                                white-space: nowrap;
+                        }
+                        th {
+                                border-bottom: 1px solid #ddd;
+                                font-weight: 700;
+                        }
+                        tbody > tr:nth-child(even) {
+                                background-color: transparent;
+                        }
+
+
+    a:hover, a:active, a:focus {
+        color: #000000;
+    }
+    header {
+        margin-bottom: 0px;
+        background-color: #dddddd;
+    }
+    .wrapper {
+        max-width: 1240px;
+    }
+    header .header-inner {
+        max-width: 1400px;
+    }
+    .top-bar-inner {
+        max-width: 1400px;
+    }
+    header .site-title {
+        font-size: 1.5em;
+        margin-bottom: 4px;
+    }
+    header .site-description {
+        font-size: 1em;
+    }
+    .site-title a:link,
+    .site-title a:visited {
+        color: #09769e;
+    }
+    header .site-title a:hover,
+    header .site-title a:active,
+    header .site-title a:focus {
+        color: #000000;
+    }
+    header .site-identity {
+        margin-top: -30px;
+    }
+    header nav {
+        margin-top: 20px;
+    }
+    header nav * {
+        font-size: 18px;
+        color: #000000;
+    }
+    header nav a,
+    header nav a:visited {
+        color: #09769e;
+    }
+    header nav a:hover,
+    header nav a:active,
+    header nav a:focus,
+    header nav .current_page_item > a,
+    header nav .current-menu-item > a {
+        color: #000000;
+        text-decoration: underline!important;
+        text-decoration: none!important;
+        font-weight: normal;
+    }
+    @media ( min-width: 790px ) {
+        header nav ul ul a {
+            background-color: #000000;
+            color: #dddddd;
+        }
+        header nav ul ul a:hover,
+        header nav ul ul a:active,
+        header nav ul ul a:focus,
+        header nav ul ul .current-menu-item a,
+        header nav ul ul .current_page_item a {
+            color: #09769e;
+        }
+    }
+    header .custom-logo-link img.custom-logo {
+        width: 100px;
+    }
+    @media ( min-width: 790px ) {
+        header {
+            background: transparent;
+        }
+    }
+    h1,h2,h3,h4,h5,h6,h1 *,h2 *,h3 *,h4 *,h5 *,h6 * {
+        margin-bottom: 30px;
+    }
+    main p {
+        line-height: 1;
+    }
+    .footer-widgets {
+        border-top-width: 7px;
+        border-color: #6f6f6f;
+        color: #ffffff;
+        background-color: #3a3a3a;
+        background-image: url("https://vamostrabalharjuntos.com.br/projetos/static/back-airborne-light.png");
+    }
+    content-inner {
+        background-color: #5a5a5a;
+    }
+    .footer-widgets a,
+                            .footer-widgets a:visited {
+        color: #aaaaaa;
+    }
+    .footer-widgets a:hover,
+    .footer-widgets a:focus,
+    .footer-widgets a:active {
+        color: #1e73be;
+    }
+    .footer-widgets .widget-title {
+        color: #dddddd;
+    }
+    footer {
+        background-color: #000000;
+        border-top-width: 1px;
+        border-top-color: #6f6f6f;
+    }
+    footer {
+        color: #FFFFFF;
+    }
+    footer a:link,
+    footer a:visited {
+        color: #09769e;
+    }
+    footer a:hover,
+    footer a:focus,
+    footer a:active {
+        color: #DDDDDD;
+    }
+    
+                       
+                        
+                        main p {
+                                line-height: 1.55;
+                                margin-bottom: 20px;
+                        }
+                        main p:last-child { margin-bottom: 0; }
+                        main h1,
+                        main h2,
+                        main h3,
+                        main h4,
+                        main h5,
+                        main h6 {
+                                font-weight: 700;
+                                margin-bottom: 20px;
+                        }
+                        /* Inputs ----------------------------- */
+                        fieldset {
+                                border: 1px solid #ddd;
+                                padding: 25px;
+                        }
+                        fieldset legend {
+                                font-size: 0.9em;
+                                font-style: italic;
+                                padding: 0 15px;
+                        }
+                        label {
+                                font-size: 0.9em;
+                                font-style: italic;
+                                margin-bottom: 10px;
+                        }
+                        textarea,
+                        input[type="email"],
+                        input[type="search"],
+                        input[type="password"],
+                        input[type="tel"],
+                        input[type="text"],
+                        input[type="url"] {
+                        border: 1px solid #ddd;
+                        color: #000;
+                        display: block;
+                        font-size: 0.9em;
+                        margin: 0 0 15px 0;
+                        padding: 15px;
+                        width: 100%;
+                        }
+                        textarea {
+                        line-height: 1.5;
+                        height: 200px;
+                        }
+                        .size-auto,
+                        .size-full,
+                        .size-large,
+                        .size-medium,
+                        .size-thumbnail {
+                                max-width: 100%;
+                                height: auto;
+                        }
+                        
+                        
+                                            .aside {
+                                display:inline;
+                        }
+                        .avatar {
+                                vertical-align:middle:
+                                width: 110px;
+                                height: 110px;
+                                border-radius: 50%;
+                        }
+                        .avatar2 {
+                            -webkit-border-radius: 50%;
+                            -moz-border-radius: 50%;
+                            border-radius: 50%;
+                            -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+                            -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+                                box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+                        }
+                        .avatar3 {
+                                width:150px;
+                                height:150px;
+                                margin: 25px auto;
+                                overflow: hidden;
+                                border-radius:50%;
+                                position: relative;
+                        }
+                        .avatar3 img {
+                                position: absolute;
+                                top:50%;
+                                left:50%;
+                                transform: translate(-50%,-50%)
+                        }
+                        .cropcircle {
+                                width: 150px;
+                                height: 150px;
+                                border-radius: 100%;
+                                background: #eee no-repeat center;
+                                background-size: cover;
+                        }
+                        .body.custom-background {
+                            background-image: url("https://vamostrabalharjuntos.com.br/projetos/static/back-airborne-light.png");
+                            background-position: left top; background-size: auto; background-repeat: repeat; background-attachment: scroll;
+                        }

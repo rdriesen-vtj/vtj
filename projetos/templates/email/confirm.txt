@@ -1,0 +1,13 @@
+Caro {{ user.username }},
+
+Bem-vindo ao "VAMOS TRABALHAR JUNTOS" !
+
+Para confirmar sua conta por favor clique no link abaixo:
+
+{{ url_for('confirm', token=token, _external=True) }}
+
+Atenciosamente,
+
+Administrador VAMOS TRABALHAR JUNTOS
+
+(não é necessário responder a este e-mail)

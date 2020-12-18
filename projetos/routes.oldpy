@@ -1,0 +1,26 @@
+from flask import Flask, render_template, flash, redirect
+from app.forms import LoginForm
+from app.models import User, Post
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
+subdominio = "/projetos"
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+@app.route('/')
+def index():
+ return render_template('index.html')
+ 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}, remember_me={}'.format(
+            form.username.data, form.remember_me.data))
+        return redirect(subdominio+'/')
+    return render_template('login.html', title='Sign In', form=form)
+
+#if __name__ == '__main__':
+#        app.run()

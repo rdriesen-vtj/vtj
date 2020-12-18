@@ -1,0 +1,132 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  <style>
+    #image1{
+      background-image: url({{ projeto.logo.icon_url }});
+    }
+    .respcropcircle{
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background: #eee no-repeat center;
+      background-size: cover;
+    }
+    .projcropcircle{
+      width: 150px;
+      height: 150px;
+      border-radius: 100%;
+      background: #eee no-repeat center;
+      background-size: cover;
+    }
+    select {
+      width: 210px;
+    }
+    table, th, td {
+      border: 0px solid black;
+      padding: padding: 0px 0px 0px 20px;
+      align="left";
+    }
+  </style>
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="content">
+          <div id="right-sidebar-inner" class="b">
+            <table>
+                  <tr>
+                    <td rowspan=3 style="width: 150px; padding: 0px">
+                      <a href="http://vamostrabalharjuntos.com.br/projetos/projeto/{{ projeto.id }}">
+                      <div id="image1" class="projcropcircle" ></div></a>
+                    </td>
+                    <td colspan=1 valign="bottom" class="has-huge-font-size" style="padding: 0px 0px 0px 20px">
+                      {{ projeto.titulo }}
+                    </td>
+                    <td>
+                      <a class="button-right" style="background-color: #f00" href="https://vamostrabalharjuntos.com.br/projetos/deltaskconfirmed/{{ projeto.id }}/{{ tarefa.id }}"">CONFIRMAR APAGAR ESTA TAREFA</a>
+                    </td>
+                    <td>
+                      <a class="button-right" style="background-color: #0f0" href="https://vamostrabalharjuntos.com.br/projetos/task/{{ projeto.id }}/{{ tarefa.id }}"">MANTER ESTA TAREFA</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 180px; height: 50px; padding: 0px 5px">
+                    {% if tarefa.progresso == 0  %}
+                      <img src="https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-gray.png" alt=""
+                        srcset="https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-gray.png 569w,
+                                https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-gray-300x84.png 300w"
+                                sizes="(max-width: 569px) 100vw, 569px" />
+                    {% endif %}
+                    {% if tarefa.progresso > 0 and tarefa.progresso < 50 %}
+                      <img src="https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-red.png" alt=""
+                        srcset="https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-red.png 569w,
+                                https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-red-300x84.png 300w"
+                                sizes="(max-width: 569px) 100vw, 569px" />
+                    {% endif %}
+                    {% if tarefa.progresso >= 50 and tarefa.progresso < 80 %}
+                      <img src="https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-50.png" alt=""
+                        srcset="https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-50.png 569w,
+                                https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-50-300x84.png 300w"
+                                sizes="(max-width: 569px) 100vw, 569px" />             
+                    {% endif %}
+                    {% if tarefa.progresso >= 80 and tarefa.progresso < 100 %}
+                      <img src="https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-80.png" alt=""
+                        srcset="https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-80.png 569w,
+                                https://vamostrabalharjuntos.com.br/online/wp-content/uploads/2020/06/star-progress-80-300x84.png 300w"
+                                sizes="(max-width: 569px) 100vw, 569px" />          
+                    {% endif %}
+                    </td>   
+                    <td style="padding: 0px 5px" class="has-large-font-size">
+                      {{ tarefa.progresso }}%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=2 style="padding: 0px 0px 0px 20px" class="has-large-font-size">
+                      TAREFA: {{ tarefa.titulo }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=3 style="padding: 15px" class="has-medium-font-size">
+                      Descrição:
+                    </td>
+                  </tr> 
+                  <tr>
+                    <td style="padding: 0px 5px">
+                    </td>
+                    <td colspan=2 style="padding: 0px 5px" class="has-medium-font-size">
+                      {{ tarefa.descricao }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=3 style="padding: 15px" class="has-medium-font-size">
+                      Responsável:
+                    </td>
+                  </tr> 
+                  <tr>
+                    <td style="padding: 0px 5px" align="right">
+                      <div id="avatar" style="background-image: url({{ responsavel.avatar.icon_url }}" class="respcropcircle"></div
+                    </td>
+                    <td colspan=2 style="padding: 0px 5px" class="has-medium-font-size">
+                      {{ responsavel.nome }} {{ responsavel.sobrenome }}
+                    </td>
+                  </tr>
+            </table>
+          </div><!-- .right-sidebar-inner --> 
+        </div><!-- .content --> 
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title"Tarefa</h4>
+          <div class="textwidget">
+            <p>Esta é uma ação parte de um projeto.</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+  
+  {% include "upload-scripts-body.html" %}
+  
+{% endblock %}

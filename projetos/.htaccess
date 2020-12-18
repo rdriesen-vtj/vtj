@@ -1,0 +1,8 @@
+# CONFIGURAR UTILIZAÇÃO DO HTTPS
+RewriteEngine on
+RewriteBase /
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://vamostrabalharjuntos.com.br/projetos/$1 [R,L]
+
+#<FilesMatch ".(ttf|otf|woff)$">
+#Header set Access-Control-Allow-Origin "*"

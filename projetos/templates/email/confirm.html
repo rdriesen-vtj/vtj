@@ -1,0 +1,7 @@
+<p>Caro {{ user.username }},</p>
+<p>Bem-vindo ao <b></b>"VAMOS TRABALHAR JUNTOS" !</b></p>
+<p>Para confirmar sua conta por favor clique no link abaixo:</p>
+<p><a href="{{ url_for('confirm', token=token, _external=True) }}">click here.</a></p>
+<p>Atenciosamente,</p>
+<p>Administrador VAMOS TRABALHAR JUNTOS</p>
+<p><small>(não é necessário responder a este e-mail)</small></p>

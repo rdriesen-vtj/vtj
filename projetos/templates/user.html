@@ -1,0 +1,103 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  <style>
+    #image1{
+      background-image: url({{ user.avatar.icon_url }});
+    }
+    .icons {
+      width: 40px;
+      height: auto;
+    }
+    table, th, td {
+      border: 0px solid black;
+      padding: padding: 0px 0px 0px 0px;
+      align="left";
+    }
+  </style>
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="page type-page status-publish hentry">
+          <div class="content">
+            <div id="right-sidebar-inner" class="b">
+              <div class="wp-block-image">
+                <table>
+                  <tr style="padding: 0px" >
+                    <td rowspan=3 style="width: 150px; padding: 0px" align="left" >
+                      <div id="image1" class="cropcircle"></div>
+                    </td>
+                    <td col span=2 valign="bottom" class="has-huge-font-size" style="padding: 0px 0px 0px 20px">
+                      {{ user.nome }} {{ user.sobrenome }}
+                    </td>
+                  </tr>
+                  <tr style="padding: 0px">
+                    <td colspan=3 valign="top" class="has-medium-font-size" style="padding: 0px 0px 0px 20px">
+                      <i id="username">{{ user.username }}</i>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <table>
+                <tr>
+                  <td style="width: 80px; padding: 5px" align="left" class="has-medium-font-size">
+                    Telefone: 
+                  </td>
+                  <td style="padding: 5px" align="left" class="has-medium-font-size">
+                    {{ user.telefone }}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 80px; padding: 5px" align="left" class="has-medium-font-size">
+                    E-mail:
+                  </td>
+                  <td style="padding: 5px" align="left" class="has-medium-font-size">
+                    {{ user.email }}
+                  </td>
+                </table>
+                <table>
+                    <tr>
+                      <td colspan = 2 class="has-medium-font-size">
+                        Organizações das quais faz parte:
+                      </td>
+                    </tr>
+                      {% for org in user.orgs %}
+                      <tr>   
+                        <td  style="padding: 5px 0px 0px 20px">
+                          <a href="https://vamostrabalharjuntos.com.br/projetos/organizacao/{{ org.titulo }}">
+                            {{ org.titulo }}
+                          </a>
+                        </td>
+                        <td style="padding: 5px 0px 0px 20px">
+                          {% if org.responsavel_id==user.id %}
+                            *responsável
+                          {% endif %}  
+                        </td>
+                      </tr>     
+                      {% endfor %}
+                </table>
+              </div>
+            </div>
+          </div><!-- .content -->
+        </div>  
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">Profile.</h4>
+          <div class="textwidget">
+            <p>Estes são dados referentes ao usuário.</p>
+            <p></p>
+            <p>Nome, Sobrenome, email, telefone são mostrados.</p>
+            <p></p>
+            <p>A imagem que aparece é o seu "avatar" escolhido do usuário.</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+  
+  {% include "upload-scripts-body.html" %}
+  
+{% endblock %}

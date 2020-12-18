@@ -1,0 +1,259 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  <style>
+    #image1{
+      background-image: url({{ user.avatar.icon_url }});
+    }
+    .icons {
+      width: 40px;
+      height: auto;
+    }
+    table, th, td {
+      border: 1px solid lightgray;
+      padding: padding: 0px 0px 0px 0px;
+      align="left";
+    }
+  </style>
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="page type-page status-publish hentry">
+          <div class="content">
+            <div id="right-sidebar-inner" class="b">
+              <div class="wp-block-image">
+                <div class="prancheta form-group" id="imagers" >
+                </div>
+                <table>
+                  <tr style="padding: 0px" >
+                    <td rowspan=3 style="width: 150; padding: 0px" align="left" >
+                      <div id="image1" class="cropcircle"></div>
+                    </td>
+                    <td col span=2 valign="bottom" class="has-huge-font-size" style="padding: 0px 0px 0px 20px">
+                      {{ user.nome }} {{ user.sobrenome }}
+                    </td>
+                  </tr>
+                  <tr style="padding: 0px">
+                    <td colspan=3 valign="top" class="has-medium-font-size" style="padding: 0px 0px 0px 20px">
+                      <i id="username">{{ user.username }}</i>
+                    </td>
+                  </tr>
+                </table>
+                <table>
+                  <tr>
+                  </tr>
+                  <tr style="padding: 15px">
+                    <td colspan=2>
+                      Escolha um dos avatares abaixo
+                    </td>
+                    <td align="center">
+                      ou faça upload de uma foto.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=2 style="padding: 0px; width: 300px" id="icon_list">
+                      {% for icon in icons %}
+                        <img class="icons" id="{{ icon.id }}" src="{{ icon.icon_url }}" alt="{{ icon.icon_name }}" width="32" height="32"
+                             style="display:inline" onclick="set_avatar('{{ icon.id }}','{{ icon.icon_url }}')"/>
+ <!--                     {% if loop.index is divisibleby 10 %}<br>{% endif %} -->
+                    {% endfor %}
+                        
+                    </td>
+                    <td align="center" valign="top" style="padding: 0px">
+                      <div>
+                        <br>
+                        <img id="photoicon" id2="{{ photoicon.id }}" src="{{ photoicon.icon_url }}" alt="" width="64" height="64" style="vertical-align: middle; display:inline"
+                             onclick="set_avatar(this.id,this.src)"/>
+                        &nbsp; &nbsp; 
+                        <br><br>
+                        <button class="button" id="upload" style="vertical-align: middle; display: inline;" onclick='addNew("{{ 'avatar' }}","User-{{ user.username }}")'>Upload</button><br>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <form method=POST enctype=multipart/form-data action="{{ url_for('profile') }}">
+              <!--  <form action="" method="POST" enctype="multipart/form-data">  -->
+                {{ form.hidden_tag() }}
+                <table>
+                  <tr>
+                    <td>
+                      {{ form.nome.label }}{{ form.nome(size=32, value=user.nome) }}
+                      {% for error in form.nome.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.sobrenome.label }}{{ form.sobrenome(size=32, value=user.sobrenome) }}
+                      {% for error in form.sobrenome.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ form.email.label }}{{ form.email(size=20, value=user.email) }}
+                      {% for error in form.email.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.telefone.label }}{{ form.telefone(size=20, value=user.telefone) }}
+                      {% for error in form.telefone.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan = 2>
+                      {{ form.genero.label }}{{ form.genero }}<br>
+                      {% for error in form.genero.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                </table>
+                Endereço
+                <table>
+                  <tr>
+                    <td colspan=3>
+                      {{ form.endereco1.label }}{{ form.endereco1(size=30, value=user.endereco1) }}
+                      {% for error in form.endereco1.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=3>
+                      {{ form.endereco2.label }}{{ form.endereco2(size=30, value=user.endereco2) }}
+                      {% for error in form.endereco2.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=2>
+                      {{ form.endereco3.label }}{{ form.endereco3(size=30, value=user.endereco3) }}
+                      {% for error in form.endereco3.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.cep.label }}{{ form.cep(size=30, value=user.cep) }}
+                      {% for error in form.cep.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ form.pais.label }}{{ form.pais(size=30, value=user.pais) }}
+                      {% for error in form.pais.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.estado.label }}{{ form.estado(size=30, value=user.estado) }}
+                      {% for error in form.estado.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.cidade.label }}{{ form.cidade(size=30, value=user.cidade) }}
+                      {% for error in form.cidade.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                </table>
+                Data de Nascimento
+                <table>
+                  <tr>
+                    <td>
+                      {{ form.dia.label }}{{ form.dia(size=10, value=user.dia) }}
+                      {% for error in form.dia.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.mes.label }}{{ form.mes(size=10, value=user.mes) }}
+                      {% for error in form.mes.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.ano.label }}{{ form.ano(size=10, value=user.ano) }}
+                      {% for error in form.ano.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan = 3>
+                      {{ form.sobre_mim.label }}{{ form.sobre_mim() }}
+                      {% for error in form.sobre_mim.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                </table>
+                </div>
+                <div style="display:none">
+                  {{ form.avatar(size=5, id="avatar", value=user.avatar_id) }}
+                </div>
+                <div class="button">
+                  {{ form.submit(class_="button") }}<br>
+                </div>
+              </form>
+ 
+            </div>
+          </div><!-- .content -->
+        </div>  
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">Edite seu Profile.</h4>
+          <div class="textwidget">
+            <p>Você pode alterar os dados referentes a sua conta.</p>
+            <p></p>
+            <p>Nome, Sobrenome, email, telefone são mostrados, Caso queira altera-los basta preencher os campos.</p>
+            <p></p>
+            <p>A imagem que aparece é o seu "avatar".</p>
+            <p>Escolha outro dentre os que estão disponíveis clicando na miniatura.</p>
+            <p>Também é possivel enviar sua própria imagem. Clique em <b>"Upload"</b e escolha o arquivo.</p>
+            <p>Precisa ser uma imagem .gif, .jpg ou .png com o tamanho máximo de 5Mb.</p>
+            <div style="display:inline-block">
+              Clique no icone &#x1f4be; para salvar.
+            </div>
+            <p></p>
+            <p>Ao final clique no botão "Enviar" para salvar as alterações.</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+  
+  <script>
+    function set_avatar(avat_id,avat_url){
+      console.log("id:"+avat_id);
+      if (avat_id=='photoicon') {
+        avat_id2 = document.getElementById("photoicon").getAttribute("id2");
+        console.log("id2:"+avat_id2);
+        avat_url2 = document.getElementById("photoicon").src;
+        document.getElementById("avatar").value=avat_id2;
+        document.getElementById('image1').style.backgroundImage="url("+avat_url2+")";
+      }
+      else {
+      document.getElementById("avatar").value=avat_id;
+      console.log("background-imager:"+avat_url);
+      document.getElementById('image1').style.backgroundImage="url("+avat_url+")";
+      };
+    };
+    //console.log('script carregado')
+  </script>
+  
+  {% include "upload-scripts-body2.html" %}
+  
+{% endblock %}

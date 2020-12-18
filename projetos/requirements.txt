@@ -1,0 +1,11 @@
+cffi==1.14.0
+Django==2.1
+misaka==2.1.0
+mysqlclient==1.4.3
+Pillow==5.4.1
+psycopg2==2.7.5
+pycparser==2.20
+pyodbc==4.0.30
+pytz==2018.5
+reportlab==3.5.13
+virtualenv==16.7.4
