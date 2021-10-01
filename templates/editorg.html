@@ -1,0 +1,196 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  <style>
+    #image1{
+      background-image: url({{ org.logo.icon_url }});
+    }
+  </style>
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="page type-page status-publish hentry">
+          <div class="content">
+            <div id="right-sidebar-inner" class="b">
+              <div class="wp-block-image">
+                <div class="prancheta form-group " id="imagers" >
+                </div>
+                <table style="padding: 0px">
+                  <tr style="padding: 0px" >
+                    <td rowspan=4 style="width: 150; padding: 0px" align="left" >
+                      <div id="image1" class="cropcircle"></div>
+                    </td>
+                    <td valign="bottom" class="has-medium-font-size" style="padding: 0px 0px 0px 20px">
+                      EDITAR ORGANIZAÇÃO
+                    </td>
+                  </tr>
+                  <tr>  
+                    <td col span=2 valign="bottom" class="has-huge-font-size" style="padding: 0px 0px 0px 20px">
+                      {{ org.titulo }}
+                    </td>
+                  </tr>
+                  <tr style="padding: 0px">
+                    <td colspan=2 valign="top" class="has-medium-font-size" style="padding: 0px 0px 0px 20px">
+                      <i id="responsavel">Responsável atual: {{ org.responsavel.nome }} {{ org.responsavel.sobrenome }}</i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0px 0px 10px 20px" class="has-medium-font-size">
+                      Status atual: {{ org.status }}
+                    </td>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr style="padding: 15px">
+                    <td colspan=2>
+                      Escolha um dos icones abaixo
+                    </td>
+                    <td align="center">
+                      faça upload de uma foto.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=2 style="padding: 0px" id="icon_list">
+                      {% for icon in icons %}
+                        <img id="{{ icon.id }}" src="{{ icon.icon_url }}" alt="{{ icon.icon_name }}" width="32" height="32"
+                             style="display:inline" onclick="set_avatar('{{ icon.id }}','{{ icon.icon_url }}')"/>
+                      {% if loop.index is divisibleby 10 %}<br>{% endif %}
+                    {% endfor %}
+                        
+                    </td>
+                    <td align="center" valign="top" style="padding: 0px">
+                      <div>
+                        <img id="photoicon" id2="{{ photoicon.id }}" src="{{ photoicon.icon_url }}" alt="" width="64" height="64" style="vertical-align: middle; display:inline"
+                             onclick="set_avatar(this.id,this.src)"/>
+                        &nbsp; &nbsp; 
+                        <button class="button" id="upload" style="vertical-align: middle; display: inline;" onclick='addNew("logo","org-{{ org.id }}")'>Upload</button><br>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <form action="" method = "POST">
+                {{ form.hidden_tag() }}
+                <table>
+                  <tr>
+                    <td>
+                      <div style="display:none">
+                        {{ form.logo(size=5, id="avatar", value=org.logo.id) }}
+                      </div>
+                    </td>
+                  </tr> 
+                  <tr>
+                    <td colspan = 2>
+                      {{ form.titulo.label }}{{ form.titulo(size=32, value=org.titulo) }}
+                      {% for error in form.titulo.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan = 2>
+                      {{ form.descricao.label }}{{ form.descricao(size=20, value=org.descricao) }}
+                      {% for error in form.descricao.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ form.contato.label }}{{ form.contato(size=20, value=org.contato) }}
+                      {% for error in form.contato.errors %}
+                      <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.status.label }}{{ form.status }}<br>
+                      {% for error in form.status.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      {{ form.responsavel.label }}<br>
+                      {{ form.responsavel(size=3) }}
+                      {% for error in form.responsavel.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.label }}{{ form.visibilidade }}<br>
+                      {% for error in form.visibilidade.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>  
+
+                </table>      
+                </div>
+                <div class="button">
+                {{ form.submit(class_="button") }}<br>
+                </div>
+              </form>
+                {% if org.responsavel.username == current_user.username %}
+                  <div><br>
+                  <a href="https://vamostrabalharjuntos.com.br/projetos/delorg/{{ org.id }}">
+                    <button class="button-right" id="apaga" style="align: right; vertical-align: middle; display: inline;">excluir organização</button><br>
+                  </a>
+                {% endif %}
+              </div>
+          </div><!-- .content -->
+        </div>  
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">Edite os dados desta Organização.</h4>
+          <div class="textwidget">
+            <p>Escolha um <em>Título</em> para sua organização.</p>
+            <p></p>
+            <p>Descreva-a de forma resumida.</p>
+            <p></p>
+            <p>Em <i>contato</i> coloque uma forma de contato. Pode ser um telefone, email ou site.</p>
+            <p></p>
+            <p>A organizaçao precisa ter um <em>responsável</em>.
+            <p>Somente este <em>Responsável</em> poderá alterar seus dados e criar projetos.</p>
+            <p>A lista mostra todos os membros atuais.</p>
+            <p></p>
+            <p>Defina a visibilidade de sua Organização como Público, Privado ou Secreto</p>
+            <il>Organizações Públicas podem ser vistas por qualquer pessoa.</il>
+            <il>Organizações Privadas podem ser vistas apenas pelos membros da organização.</il>
+            <il>Organizações Secretas só podem ser vistos por alguns usuários selecionados. </il>
+            </p><p>
+            </p>Escolha um <em>Icone</em> para representar o logo da sua organização ou faça o UPLOAD dele.</p>
+            <p></p>
+            <p>Agora basta clicar em <b>ENVIAR</b> para atualizar sua organização</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+  
+  <script>
+    function set_avatar(avat_id,avat_url){
+      console.log("id:"+avat_id);
+      if (avat_id=='photoicon') {
+        avat_id2 = document.getElementById("photoicon").getAttribute("id2");
+        console.log("id2:"+avat_id2);
+        avat_url2 = document.getElementById("photoicon").src;
+        document.getElementById("avatar").value=avat_id2;
+        document.getElementById('image1').style.backgroundImage="url("+avat_url2+")";
+      }
+      else {
+      document.getElementById("avatar").value=avat_id;
+      console.log("background-imager:"+avat_url);
+      document.getElementById('image1').style.backgroundImage="url("+avat_url+")";
+      };
+    };
+    //console.log('script carregado')
+  </script>
+  
+  {% include "upload-scripts-body2.html" %}
+  
+{% endblock %}

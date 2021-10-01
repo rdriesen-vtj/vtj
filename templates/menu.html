@@ -1,0 +1,49 @@
+{% if not current_user.is_anonymous %}
+  <div style="float: right; display: flex;">
+    <a href="https://vamostrabalharjuntos.com.br/messages">
+      <img id="envelope" style="width: 40px; height: auto;" src="https://vamostrabalharjuntos.com.br/static/images/new-{{ newmsgs|length  }}.png" alt="">
+    </a>
+    <a id="username" href="https://vamostrabalharjuntos.com.br/profile">
+      {{ current_user.username }}
+    </a>
+  </div>
+{% endif %}  
+<nav id="menu-menu" class="site-navigation" role="navigation">
+  <div class="menu-principal-container">
+    <ul id="menu-principal" class="menu">
+    {% if current_user.is_anonymous %}
+      <li class="page_item page-item-18"><a href="https://vamostrabalharjuntos.com.br/login">Login</a></li>
+    {% else %}
+      <li class="menu-item"><a href="https://vamostrabalharjuntos.com.br/">Home</a></li>
+      <li class="menu-item"><a href="https://vamostrabalharjuntos.com.br/lista_de_projetos">Projetos</a></li>
+      <li class="menu-item"><a href="https://vamostrabalharjuntos.com.br/lista_de_organizacoes">Organizações</a></li>
+      <li class="menu-item"><a href="https://vamostrabalharjuntos.com.br/newproj">Novo Projeto</a></li>
+      <li class="menu-item"><a href="https://vamostrabalharjuntos.com.br/orgcreate">Nova Organização</a></li>
+      <li class="menu-item"><a href="https://vamostrabalharjuntos.com.br/profile">Profile</a></li>
+      <li class="menu-item"><a href="https://vamostrabalharjuntos.com.br/endereco">Endereço</a></li>
+      <li class="menu-item"><a href="https://vamostrabalharjuntos.com.br/contribuicao">Contribuir</a></li>
+      <li class="menu-item"><a href="https://vamostrabalharjuntos.com.br/logout">Logout</a></li>
+	  </ul>
+	{% endif %}
+    </ul>
+  </div>
+</nav>
+<p id="demo"></p>
+
+<script>
+  function handleNewData() {
+    url = 'https://vamostrabalharjuntos.com.br/checknewmsgs';
+    var req = new XMLHttpRequest();
+    req.overrideMimeType("application/json");
+    req.open('GET', url, true);
+    req.onload  = function() {
+      var jsonResponse = JSON.parse(req.responseText);
+      url2 = "https://vamostrabalharjuntos.com.br/static/images/new-" + String(jsonResponse.new) +".png";
+      document.getElementById("envelope").src = url2;
+    };
+    req.send(null);
+  }
+  //RETIRE AS BARRAS DE COMENTARIO ABAIXO PARA HABILITAR A BUSCA POR MENSAGENS NOVAS CICLICA
+  //myVar = setInterval(handleNewData, 10000);
+
+</script>

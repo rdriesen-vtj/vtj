@@ -1,0 +1,386 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  
+  <script type="text/javascript">
+      crossorigin="anonymous"
+      src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js">
+    
+  </script>
+  <style>
+    #image1{
+      background-image: url({{ projeto.logo.icon_url }});
+    }
+    table, th, td {
+      border: 1px solid LightGray;
+      padding: 5px 5px 5px 20px;
+      align="left";
+      margin-bottom: 0px;
+    }
+    }
+    .star {
+      width: 150px;
+      height: auto;
+      padding: 0px;
+    }
+    .little_star {
+      width: 50px;
+      height: auto;
+      padding: 0px 5px;
+    }
+    .photo:active, photo:focus {
+      width: 100%;
+      height: auto;
+      aspect-ratio: attr(width) / attr(height);
+      }
+    .photo {
+      width: auto;
+      height: 64px;
+      padding: 5px;
+      display: inline;
+    }
+    .tool {
+      width: 30px;
+      height: auto;
+      padding: 0px 5px;
+      display:inline;
+    }
+    .tool2 {
+      width: 40px;
+      height: auto;
+      padding: 0px 5px;
+      display:inline;
+    }
+    .star-progress {
+      width: 180px;
+      height: auto;
+    }
+    .gray {
+      color: #888888;
+    }
+    .td_logo_90 {
+      width: 90px;
+      height: auto;
+      padding: 0px;
+      text-align: left;
+    }
+    .td_logo_120 {
+      width: 120px;
+      height: auto;
+      padding: 0px;
+      text-align: left;
+    }
+    .td_right {
+      width: 40;
+      padding: 0px 5px;
+      text-align: right;
+    }
+    .td_left {
+      width: auto;
+      padding: 0px 20px;
+      text-align: left;
+    }
+    .td_huge {
+      padding: 0px 0px 0px 20px;
+      vertical-align: middle;
+    }
+    .td_big {
+      padding: 0px 0px 0px 15px;
+      vertical-align: middle;
+    }
+  </style>
+<body>  
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="papel">
+          <div class="content">
+            <div id="right-sidebar-inner" class="b projeto">
+              <div class="wp-block-image">
+                <div class="prancheta form-group " id="imagers" >
+                </div>
+                <table style="padding: 0px">
+                  <tr style="padding: 0px" >
+                    {% if big %}
+                      <td class=td_logo_90 >
+                        <div id="image1" class="cropcircle2"></div>
+                      </td>
+                      <td class="has-big-font-size big">
+                        {{ projeto.titulo }} 
+                      </td>
+                    {% else %}
+                      <td class=td_logo_120 >
+                        <div id="image1" class="cropcircle"></div>
+                      </td>
+                      <td class="has-huge-font-size huge">
+                        {{ projeto.titulo }} 
+                      </td>
+                    {% endif %}
+                  </tr>
+                </table>
+                <table>
+                  {% if user_status == 'responsável' or user_status == 'administrador' %}
+                  <tr>
+                    <td>
+                      <p><a class="button-right" href="http://vamostrabalharjuntos.com.br/projetos/editproj/{{ projeto.id }}">EDITAR PROJETO</a></p>
+                    </td>
+                    <td>
+                      <p><a class="button-right" href="http://vamostrabalharjuntos.com.br/projetos/projusers/{{ projeto.id }}">GERENCIAR MEMBROS</a></p>
+                    </td>
+                  </tr>
+                  {% endif %}
+                  <tr>
+                    <td class="has-medium-font-size td_left" >
+                      Responsável: &nbsp; <a href="http://vamostrabalharjuntos.com.br/projetos/user/{{ projeto.responsavel.username }}">
+                     {{ projeto.responsavel.nome }} {{ projeto.responsavel.sobrenome }}</a>
+                    </td class="">
+                    <td class="td_left td_right" >
+                      <a href="javascript:genPDF()">
+                        <img class="tool2" src="https://vamostrabalharjuntos.com.br/projetos/static/images/pdf.png" alt="">
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=2 class="has-medium-font-size">
+                      Organização: &nbsp; <a href="http://vamostrabalharjuntos.com.br/projetos/organizacao/{{ projeto.orgs.first().titulo }}">
+                      {{ projeto.orgs.first().titulo }}</a><br><br>
+                      Status atual: &nbsp; {{ projeto.status }}<br><br>
+                      <p class="has-medium-font-size">Objetivo:</p>
+                      <p class="has-regular-font-size">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ projeto.objetivo }}</p>
+                      <p class="has-medium-font-size">Descrição:</p>
+                      {%  set linhas = projeto.descricao.split('\n') %}
+                      <div class="has-regular-font-size">
+                        {% for linha in linhas %}
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ linha }}<br>
+                        {% endfor %}
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <table style="padding: 0px">
+                  {% if user_status == 'responsável' or user_status == 'administrador' or user_status == 'editor' %}
+                    <tr>
+                      <td>
+                        <a class="button-right" href="http://vamostrabalharjuntos.com.br/projetos/newstage/{{ projeto.id }}">NOVA ETAPA</a>
+                      </td>
+                    </tr>
+                  {% endif %}
+                  {% if etapas|length == 0 %}
+
+                  {% else %}
+                  {% for etapa in etapas %}
+                    {% if (etapa.visibilidade == "VISÍVEL") %}
+                      <tr>
+                        <td>
+                          <p class="has-medium-font-size">{{ etapa.titulo }}
+                            {% if user_status == 'responsável' or user_status == 'administrador' or user_status == 'editor' %}
+                              <a href="http://vamostrabalharjuntos.com.br/projetos/editstage/{{ etapa.id }}">
+                                <img class="tool" src="https://vamostrabalharjuntos.com.br/projetos/static/images/edit.png" alt="">
+                              </a>  
+                            {% endif %}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          {%  set linhas = etapa.body.split('\n') %}
+                          <div class="has-regular-font-size">
+                            {% for linha in linhas %}
+                              &nbsp;&nbsp;{{ linha }}<br>
+                            {% endfor %}
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                    <table>
+                      <tr>
+                        <td>
+                      {% for photo in etapa.photos %}
+                          
+                            <img class="photo" src={{ photo.icon_url }} alt="" width="64" height="auto">
+                          
+                      {% endfor %}
+                        </td>
+                      </tr>
+                    </table>
+                    <table>
+                    {% else %}
+                      {% if user_status == 'responsável' or user_status == 'administrador' or user_status == 'editor' %}
+                        <tr>
+                          <td>
+                            <p class="has-medium-font-size gray">{{ etapa.titulo }}
+                              <a href="http://vamostrabalharjuntos.com.br/projetos/editstage/{{ etapa.id }}">
+                                <img class="tool" src="https://vamostrabalharjuntos.com.br/projetos/static/images/edit.png" alt="">
+                              </a>  
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            {% for linha in linhas %}
+                              <div class="gray">
+                                &nbsp;&nbsp;{{ linha }}<br>
+                              </div>
+                            {% endfor %}
+                          </td>
+                        </tr>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                  {% endif %}
+                </table>     
+                <table style="padding: 0px">
+                  <tr>
+                    <td>
+                      <p class="has-large-font-size">Tarefas:</p>
+                    </td>
+                    <td colspan=2>
+                      {% if user_status == 'responsável' or user_status == 'administrador' or user_status == 'editor' %}
+                        <a class="button-right" href="http://vamostrabalharjuntos.com.br/projetos/newtask/{{ projeto.id }}">NOVA TAREFA</a>
+                      {% endif %}
+                    </td>
+                   </tr>                     
+                  {% if tasks|length == 0 %}
+                   <tr>
+                    <td colspan=3>
+                      <p class="has-regular-font-size">Ainda não existem tarefas.</p>
+                    </td>
+                   </tr>
+                  {% else %}
+                   {% for task in tasks %}
+                    {% if task.progresso < 100 %}
+                    <tr>
+                      <td style="width: 150px; padding: 0px">
+                        <a href="https://vamostrabalharjuntos.com.br/projetos/task/{{ projeto.id }}/{{ task.id }}" >
+                        {% if task.responsavel_id == 0 %}
+                          <img class="star-progress" src="https://vamostrabalharjuntos.com.br/projetos/static/images/star-progress-gray.png" alt="">
+                        {% else %}  
+                          <img class="star-progress" src="https://vamostrabalharjuntos.com.br/projetos/static/images/star{{task.progresso}}.png" alt="">
+                        {% endif %}
+                        </a>
+                      </td>
+                      <td style="width: 40px; padding: 0px 5px" class="has-large-font-size">
+                        <a href="https://vamostrabalharjuntos.com.br/projetos/task/{{ projeto.id }}/{{ task.id }}" >{{task.progresso}}%</a>
+                      </td>
+                      <td colspan=2 style="padding: 0px">
+                        <a href="https://vamostrabalharjuntos.com.br/projetos/task/{{ projeto.id }}/{{ task.id }}">{{task.titulo}}</a>
+                      </td>
+                    </tr>  
+                    {% endif %}
+                   {% endfor %}
+                  {% endif %}
+                </table>
+                <p class="has-large-font-size">Tarefas concluidas</p>
+                <figure class="wp-block-table aligncenter">
+                  <table class="has-fixed-layout">
+                    <tbody>
+                      <tr>
+                        {% for task in tasks %}
+                          {% if task.progresso == 100 %}
+                            <td>
+                              <a href="https://vamostrabalharjuntos.com.br/projetos/task/{{ projeto.id }}/{{ task.id }}">
+                                <img src="https://vamostrabalharjuntos.com.br/projetos/static/images/star.png" alt="" class="little_star">
+                              </a>
+                              {% if loop.index is divisibleby 10 %}
+                      </tr>
+                      <tr>
+                              {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                      </tr>
+                    </tbody>
+                  </table>
+                </figure>
+                <p class="has-large-font-size">Participantes</p>
+                <figure class="wp-block-table aligncenter">
+                  <table class="has-fixed-layout">
+                    <tbody>
+                      <tr>
+                      {% for us in projeto.userss %}
+                        <td style="padding: 0px 5px" align="left">
+                          <a href="http://vamostrabalharjuntos.com.br/projetos/user/{{ us.user.username }}">
+                             {{ us.user.nome }} {{ us.user.sobrenome }}
+                          </a>
+                        </td>
+                        {% if loop.index is divisibleby 1 %}
+                      </tr>
+                      <tr>
+                        {% endif %}
+                      {% endfor %}
+                      </tr>
+                      <tr>
+                        <td style="padding: 5px 5px" align="left">
+                           Seu status neste projeto esta definido como {{ user_status }}.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </figure>
+              </div>
+            </div>  
+          </div><!-- .content -->
+        </div><!-- .post -->
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+    		<div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">ÁREA DE TRABALHO</h4>
+          <b>Dados do Projeto.</b>
+          <div class="textwidget">
+            <p>As informações gerais do projeto são mostradas aqui.</p>
+            <p>O <b>objetivo</b> e a <b>descrição</b> são as que devem ser sempre lembradas para que o projeto mantenha seu foco.</p>
+            <p>Estas informações gerais podem ser alteradas somente pelo usuário <b>responsável</b> no projeto.</p>
+            <p></p>
+            <p></p>
+            <p><b>Tarefas</b></p>
+            <p>As tarefas são as ações práticas que compõe um projeto.</p>
+            <p>Elas são representadas por estrelas.</p>
+            <p>Podemos ver o progresso das tarefas abertas pela barra ao lado das estrelas.</p>
+            <p>Ao criar uma tarefa, ela é representada por uma cor escura até que seja iniciada com a atribuição dela a alguém.</p>
+            <p>Para atribuir a tarefa é preciso ir no detalhamento dela clicando sobre a tarefa.</p>
+            <p>Quando uma tarefa é completada sua estrela passa para a área de tarefas concluidas.
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+</body>  
+  <script>
+    function set_avatar(avat_id,avat_url){
+      console.log("id:"+avat_id);
+      if (avat_id=='photoicon') {
+        avat_id2 = document.getElementById("photoicon").getAttribute("id2");
+        console.log("id2:"+avat_id2);
+        avat_url2 = document.getElementById("photoicon").src;
+        document.getElementById("avatar").value=avat_id2;
+        document.getElementById('image1').style.backgroundImage="url("+avat_url2+")";
+      }
+      else {
+      document.getElementById("avatar").value=avat_id;
+      console.log("background-imager:"+avat_url);
+      document.getElementById('image1').style.backgroundImage="url("+avat_url+")";
+      };
+    };
+    //console.log('script carregado')
+  </script>
+  
+<script type="text/javascript">
+  console.log('pdf')
+  function genPDF() {
+    var doc = new jsPDF({
+    orientation: 'p',
+    unit: 'mm',
+    format: 'a4'
+    });
+    
+    doc.text(20,20,"PROJETO");
+    doc.save("teste.pdf");
+    }
+</script>
+
+
+  
+  {% include "upload-scripts-body2.html" %}
+  
+{% endblock %}

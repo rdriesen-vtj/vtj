@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta https-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/static/style-setup.css' type='text/css' media='all'>
+    <link rel="icon" href="/static/images/logo-vamostrabalharjuntos-32x32.png" sizes="32x32" crossorigin="anonymous">
+    <link rel="icon" href="/static/images/logo-vamostrabalharjuntos-192x192.png" sizes="192x192" crossorigin="anonymous">
+    <link rel="apple-touch-icon" href="/static/images/logo-vamostrabalharjuntos-180x180.png" crossorigin="anonymous">
+    <meta name="msapplication-TileImage" content="/static/images/logo-vamostrabalharjuntos-270x270.png" crossorigin="anonymous">
+    
+    <style  type='text/css'>
+
+    a, a:visited {
+        color: #09769e;
+    }
+    a:hover, a:active, a:focus {
+        color: #000000;
+    }
+    header {
+        margin-bottom: 0px;
+        background-color: #dddddd;
+        background-image: url("/static/images/back-airborne-light.png") !important;
+        background-position: left top !important;
+        background-size: auto !important;
+        background-repeat: repeat !important;
+        background-attachment: scroll !important;
+    }
+    .wrapper {
+        max-width: 1240px;
+    }
+    header .header-inner {
+        max-width: 1400px;
+    }
+    .top-bar-inner {
+        max-width: 1400px;
+    }
+    header .site-title {
+        font-size: 1.5em;
+        margin-bottom: 4px;
+    }
+    header .site-description {
+        font-size: 1em;
+    }
+    .site-title a:link,
+    .site-title a:visited {
+        color: #09769e;
+    }
+    header .site-title a:hover,
+    header .site-title a:active,
+    header .site-title a:focus {
+        color: #000000;
+    }
+    header .site-identity {
+        margin-top: -30px;
+    }
+    header nav {
+        margin-top: 20px;
+    }
+    header nav * {
+        font-size: 18px;
+        color: #000000;
+    }
+    header nav a,
+    header nav a:visited {
+        color: #09769e;
+    }
+    header nav a:hover,
+    header nav a:active,
+    header nav a:focus,
+    header nav .current_page_item > a,
+    header nav .current-menu-item > a {
+        color: #000000;
+        text-decoration: underline!important;
+        text-decoration: none!important;
+        font-weight: normal;
+    }
+    @media ( min-width: 790px ) {
+        header nav ul ul a {
+            background-color: #000000;
+            color: #dddddd;
+        }
+        header nav ul ul a:hover,
+        header nav ul ul a:active,
+        header nav ul ul a:focus,
+        header nav ul ul .current-menu-item a,
+        header nav ul ul .current_page_item a {
+            color: #09769e;
+        }
+    }
+    header .custom-logo-link img.custom-logo {
+        width: 100px;
+    }
+    @media ( min-width: 790px ) {
+        header {
+            background: transparent;
+        }
+    }
+    h1,h2,h3,h4,h5,h6,h1 *,h2 *,h3 *,h4 *,h5 *,h6 * {
+        margin-bottom: 30px;
+    }
+    main p {
+        line-height: 1;
+    }
+
+    </style>
+    <script type="text/javascript">
+        function w3tc_popupadmin_bar(url) {
+            return window.open(url, '', 'width=800,height=600,status=no,toolbar=no,menubar=no,scrollbars=yes');
+        }
+    </script>
+
+    <style id="wpcake-custom-font" type="text/css">
+
+                        h1,h2,h3,h4,h5,h6,
+                        h1 *,h2 *,h3 *,h4 *,h5 *,h6 *{
+                                font-family: PT Sans Narrow;
+                        }
+                        header .site-title,
+                        header .site-title a{
+                                font-family: Open Sans Condensed;
+                        }
+                        header nav *,
+                        .toggle-menu{
+                                font-family:PT Sans Narrow;
+                        }
+    </style>
+
+    <style type="text/css" id="flash-msg">
+                    div.flash-msg {
+                                color: #FF0000;
+                                padding: 20px 100px 20px 150px;
+                        }
+    </style>
+    <style type="text/css">
+                    table {
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                empty-cells: show;
+                                font-size: 0.9em;
+                                margin-bottom: 30px;
+                                max-width: 100%;
+                                overflow: hidden;
+                                width: 100%;
+                        }
+                        th,
+                        td {
+                                line-height: 1;
+                                margin: 0;
+                                overflow: visible;
+                                padding: 2.5%;
+                        }
+                        caption {
+                                border-bottom: 1px solid #ddd;
+                                font-size: 13px;
+                                font-weight: 700;
+                                padding-bottom: 2.5%;
+                                text-align: center;
+                                text-transform: uppercase;
+                        }
+                        thead {
+                                vertical-align: bottom;
+                                white-space: nowrap;
+                        }
+                        th {
+                                border-bottom: 1px solid #ddd;
+                                font-weight: 700;
+                        }
+
+                        .projeto {
+                                margin: 0 0 3.5em 0;
+                                border: 1px solid #EFEFEF;
+                                border-radius: 0.2em;
+                                -webkit-box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+                                box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+                                clear: both;
+                                position: relative;
+                                padding: 1.5em;
+                                background-color: #EFEFEF;
+                        }
+                        .prancheta {
+                            position: relative;
+                            margin: 0 0 3.5em 0;
+                        }
+                        .photoedit {
+                            position: relative;
+                            margin: 0 0 0 0;
+                        }
+    </style>
+    <style id="customized" type="text/css">
+                    .aside {
+                                display:inline;
+                        }
+                        .avatar {
+                                vertical-align:middle;
+                                width: 110px;
+                                height: 110px;
+                                border-radius: 50%;
+                        }
+                        .avatar2 {
+                            -webkit-border-radius: 50%;
+                            -moz-border-radius: 50%;
+                            border-radius: 50%;
+                            -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+                            -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+                                box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+                        }
+                        .avatar3 {
+                                width:150px;
+                                height:150px;
+                                margin: 25px auto;
+                                overflow: hidden;
+                                border-radius:50%;
+                                position: relative;
+                        }
+                        .avatar3 img {
+                                position: absolute;
+                                top:50%;
+                                left:50%;
+                                transform: translate(-50%,-50%)
+                        }
+                        .cropcircle {
+                                width: 120px;
+                                height: 120px;
+                                border-radius: 100%;
+                                background: #eee no-repeat center;
+                                background-size: cover;
+                                text-align:center;
+                        }
+                        .cropcircle2 {
+                                width: 90px;
+                                height: 90px;
+                                border-radius: 100%;
+                                background: #eee no-repeat center;
+                                background-size: cover;
+                                text-align:center;
+                        }
+
+    </style><!-- uploads begin -->    
+    <link rel='stylesheet' id='wpcake-font-css' href='//fonts.googleapis.com/css?family=PT+Sans+Narrow%3Aregular&amp;ver=5.4.2' type='text/css' media='all'> 
+    <link rel='stylesheet' id='wpcake-site-title-font-css' href='//fonts.googleapis.com/css?family=Open+Sans+Condensed%3A300&amp;ver=5.4.2' type='text/css' media='all'> 
+</head>
+
+<body>
+  {% include "upload-scripts.html" %}
+<!-- uploads end   -->
+  <header role="banner" class="header-inner">
+    <div class="header-inner">
+      <div class="site-identity has-mobile-logo">
+        <a href="/" class="custom-logo-link" rel="home">
+          <img src="/static/images/logo-vamostrabalharjuntos-transparent.png" class="custom-logo" alt="">
+        </a>
+        <a href="/" class="custom-mobile-logo-link" rel="home">
+         <img src="/static/images/logo-vamostrabalharjuntos-pq-cinza.png" class="custom-mobile-logo" alt="">
+        </a>
+      </div><!-- .site-identity -->
+      <button type="button" class="toggle-menu" onclick="document.querySelector('body').classList.toggle('show-menu');">Menu</button>
+      {% include "menu.html" %}
+      <div class="flash-msg">
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul>
+          <li style="list-style: none">{% for message in messages %}</li>
+          <li class="flash-msg">{{ message }}</li>
+          <li style="list-style: none">{% endfor %}</li>
+        </ul>{% endif %} {% endwith %}
+      </div>
+    </div><!-- /container -->
+  </header>{% block content %} {% endblock %} {% include "footer.html" %}
+</body>
+</html>

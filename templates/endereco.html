@@ -1,0 +1,173 @@
+{% extends "base3.html" %}
+
+
+{% block content %}
+  <style>
+    #image1{
+      background-image: url({{ user.avatar.icon_url }});
+    }
+    .icons {
+      width: 40px;
+      height: auto;
+    }
+    table, th, td {
+      border: 1px solid lightgray;
+      padding: padding: 0px 0px 0px 0px;
+      align="left";
+    }
+  </style>
+  
+  <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+  </style>
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="page type-page status-publish hentry">
+          <div class="content">
+            <div id="right-sidebar-inner" class="b">
+              <div class="wp-block-image">
+                <div id="mapa" style="height: 200px; width: 300px">
+                </div>
+                Endereço
+                <table>
+                  <tr>
+                    <td colspan=3>
+                      {{ form.txtEndereco.label }}{{ form.txtEndereco(size=30, id="txtEndereco") }}
+                      <input type="button" id="btnEndereco" name="btnEndereco" value="Mostrar no mapa" />
+                      {% for error in form.txtEndereco.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                      COORDENADAS:
+                    </td>
+                    <td>
+                      {{ form.txtLatitude.label }}{{ form.txtLatitude(size=30, id="txtLatitude") }}
+                      {% for error in form.txtLatitude.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.txtLongitude.label }}{{ form.txtLongitude(size=30, id="txtLongitude") }}
+                      {% for error in form.txtLongitude.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=3>
+                      {{ form.endereco1.label }}{{ form.endereco1(size=30, value=user.endereco1) }}
+                      {% for error in form.endereco1.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=3>
+                      {{ form.endereco2.label }}{{ form.endereco2(size=30, value=user.endereco2) }}
+                      {% for error in form.endereco2.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=2>
+                      {{ form.endereco3.label }}{{ form.endereco3(size=30, value=user.endereco3) }}
+                      {% for error in form.endereco3.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.cep.label }}{{ form.cep(size=30, value=user.cep) }}
+                      {% for error in form.cep.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ form.pais.label }}{{ form.pais(size=30, value=user.pais) }}
+                      {% for error in form.pais.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.estado.label }}{{ form.estado(size=30, value=user.estado) }}
+                      {% for error in form.estado.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {{ form.cidade.label }}{{ form.cidade(size=30, value=user.cidade) }}
+                      {% for error in form.cidade.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                </table>
+                
+                <div class="button">
+                  {{ form.submit(class_="button") }}<br>
+                </div>
+              </form>
+ 
+            </div>
+          </div><!-- .content -->
+        </div>  
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">Edite Endereço.</h4>
+          <div class="textwidget">
+          </div>
+            <p>Ao final clique no botão "Enviar" para salvar as alterações.</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script defer type="text/javascript"
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASFBxkgNTSThzwM-Vpn5oZCWg-g1HHa6w&libraries=&v=weekly">
+  </script>
+  <script defer type="text/javascript"
+          src="https://vamostrabalharjuntos.com.br/projetos/static/jquery-ui-1.12.1.custom/jquery-ui.min.js">
+  </script>
+  <script defer type="text/javascript"
+          src="https://vamostrabalharjuntos.com.br/projetos/static/mapa/mapa.js">
+  </script>
+  <!-- 
+  <script type="text/javascript" src="https://vamostrabalharjuntos.com.br/projetos/static/mapa/mapa.js"></script>
+   -->
+  <script>
+    function set_avatar(avat_id,avat_url){
+      console.log("id:"+avat_id);
+      if (avat_id=='photoicon') {
+        avat_id2 = document.getElementById("photoicon").getAttribute("id2");
+        console.log("id2:"+avat_id2);
+        avat_url2 = document.getElementById("photoicon").src;
+        document.getElementById("avatar").value=avat_id2;
+        document.getElementById('image1').style.backgroundImage="url("+avat_url2+")";
+      }
+      else {
+      document.getElementById("avatar").value=avat_id;
+      console.log("background-imager:"+avat_url);
+      document.getElementById('image1').style.backgroundImage="url("+avat_url+")";
+      };
+    };
+    //console.log('script carregado')
+  </script>
+  
+  {% include "upload-scripts-body.html" %}
+  
+{% endblock %}

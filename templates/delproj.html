@@ -1,0 +1,54 @@
+{% extends "base3.html" %}
+
+{% block content %}
+
+<style>
+    table, th, td {
+      border: 0px solid black;
+      padding: padding: 0px 0px 0px 20px;
+      align="left";
+    }
+    .projcropcircle{
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background: #eee no-repeat center;
+      background-size: cover;
+    }
+</style>
+  
+<body>
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="page type-page status-publish hentry">
+          <div class="content">
+            <div class="wp-block-image">
+              <figure class="alignleft size-large">
+                <img id="logo_img" src="{{ proj.logo.icon_url }}" alt="{{ proj.logo.icon_name }}" width="150" height="150" class="wp-image-123"/>
+              </figure>
+            </div>
+            <p class="has-huge-font-size">{{ proj.titulo }}</p>
+            <p><a class="button-right" style="background-color: #f00"
+            href="https://vamostrabalharjuntos.com.br/projetos/delprojconfirmed/{{ proj.id }}"">CONFIRMAR APAGAR ESTE PROJETO</a></p>
+            <p><a class="button-right" style="background-color: #0f0"
+            href="https://vamostrabalharjuntos.com.br/projetos/projeto/{{ proj.id }}"">MANTER ESTE PROJETO</a></p>
+            </div>
+          </div><!-- .content -->
+        </div><!-- .post -->
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">ÁREA DE TRABALHO</h4>
+          <b>Confirmação final para apagar um Projeto.</b>
+          <b>ATENÇÂO: Dados e fotos serão apagados de forma irreversível .</b>
+          <div class="textwidget">
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+</body>
+{% endblock %}

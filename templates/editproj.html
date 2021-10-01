@@ -1,0 +1,222 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  <style>
+    #image1{
+      background-image: url({{ projeto.logo.icon_url }});
+    }
+     .icons {
+      width: 40px;
+      height: auto;
+      display:inline;
+    }
+    table, th, td {
+      border: 0px solid black;
+      padding: padding: 0px 0px 0px 0px;
+      align="left";
+    }
+  </style>
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="page type-page status-publish hentry">
+          <div class="content">
+            <div id="right-sidebar-inner" class="b">
+              <div class="wp-block-image">
+                <div class="prancheta form-group " id="imagers" >
+                </div>
+                <table style="padding: 0px">
+                  <tr style="padding: 0px" >
+                      <td style="width: 120px; height: auto; padding: 0px" align="left" >
+                        <div id="image1" class="cropcircle">
+                          <a href="https://vamostrabalharjuntos.com.br/projetos/projeto/{{ projeto.id }}" style="display:inline-block; width:100%; height:100%;"></a>
+                        </div>
+                      </td>
+                    <td col span=2 valign="bottom" class="has-huge-font-size" style="padding: 0px 0px 0px 20px">
+                      {{ projeto.titulo }}
+                    </td>
+                  </tr>
+                  <tr style="padding: 0px">
+                    <td colspan=2 valign="top" class="has-medium-font-size" style="padding: 0px 0px 0px 20px">
+                      <i id="responsavel">Responsável: {{ projeto.responsavel.nome }} {{ projeto.responsavel.sobrenome }}</i>
+                    </td>
+                    <td class="has-medium-font-size" >
+                      Status: &nbsp;{{ projeto.status }}
+                    </td>
+                  </tr>
+                  <tr>
+                </table>
+                <table>
+                  </tr>
+                  <tr style="padding: 15px">
+                    <td colspan=2>
+                      Escolha um dos icones abaixo
+                    </td>
+                    <td align="center">
+                      ou faça upload de uma foto.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=2 style="padding: 0px" id="icon_list">
+                      {% for icon in icons %}
+                        <img id="{{ icon.id }}" src="{{ icon.icon_url }}" alt="{{ icon.icon_name }}" width="32" height="32"
+                            class="icons" onclick="set_avatar('{{ icon.id }}','{{ icon.icon_url }}')"/>
+ <!--                     {% if loop.index is divisibleby 10 %}<br>{% endif %}   -->
+                    {% endfor %}
+                        
+                    </td>
+                    <td align="center" valign="top" style="padding: 0px">
+                      <div>
+                        <img id="photoicon" id2="{{ projeto.logo.id }}" src="{{ projeto.logo.icon_url }}" alt="" width="64" height="64" style="vertical-align: middle; display:inline"
+                             onclick="set_avatar(this.id,this.src)"/>
+                        &nbsp; &nbsp; 
+                        <button class="button-right" id="upload" style="vertical-align: middle; display: inline;" onclick='addNew("projicon","projeto-{{ projeto.id }}")'>Upload</button><br>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <form action="" method = "POST">
+                {{ form.hidden_tag() }}
+                <table>
+                  <tr>
+                    <td>
+                      <div style="display:none">
+                        {{ form.icon(size=5, id="avatar", value=projeto.icon_id) }}
+                      </div>
+                    </td>
+                  </tr> 
+                  <tr>
+                    <td colspan = 2>
+                      {{ form.titulo.label }}{{ form.titulo(size=32, value=projeto.titulo) }}
+                      {% for error in form.titulo.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan = 2>
+                      {{ form.descricao.label }}{{ form.descricao(default=projeto.descricao) }}
+                      {% for error in form.descricao.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan = 2>
+                      {{ form.objetivo.label }}{{ form.objetivo(size=20, value=projeto.objetivo) }}
+                      {% for error in form.objetivo.errors %}
+                      <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Escolha uma organização da qual você faz parte</p>
+                      {{ form.organizacao.label }}<br>
+                      {{ form.organizacao(size=3, default=projeto.orgs.first().id) }}
+                      {% for error in form.organizacao.errors %}
+                      <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a class="button-right" href="http://vamostrabalharjuntos.com.br/projetos/orgcreate">NOVA ORGANIZAÇÃO</a>
+                    </td>
+                  </tr>                    
+                  <tr>
+                    <td>
+                      {{ form.responsavel.label }}<br>
+                      {{ form.responsavel(size=3) }}
+                      {% for error in form.responsavel.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ form.visibilidade.label }}{{ form.visibilidade }}<br>
+                      {% for error in form.visibilidade.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ form.status.label }}{{ form.status }}<br>
+                      {% for error in form.status.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>
+                  </tr> 
+                </table>      
+                </div>
+                <p class="button-right">{{ form.submit() }}</p><br>
+              </form>
+              {% if projeto.responsavel.username == current_user.username %}
+                  <div><br>
+                  <a href="https://vamostrabalharjuntos.com.br/projetos/delproj/{{ projeto.id }}">
+                    <button class="button-right" id="apaga" style="align: right; vertical-align: middle; display: inline;">excluir projeto</button><br>
+                  </a>
+                {% endif %}
+              </div>
+          </div><!-- .content -->
+        </div>  
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">Edite seu Projeto.</h4>
+          <div class="textwidget">
+            <p>Escolha um <em>Título</em> para seu projeto. Exemplo: Aeroplano 14Bis</p>
+            <p></p>
+            <p>Descreva-o de forma resumida. Exemplo: Construção de uma máquina mais pesada que o ar capaz de voar por força própria.</p>
+            <p></p>
+            <p>Em <i>Objetivo</i> coloque o que pretente atingir com seu projeto. Exemplo: Inventar o avião.</p>
+            <p></p>
+            <p>Todo projeto deve pertencer a uma <em>Organização</em>. Selecione dentre as que você partipa.</p>
+            <p>Caso não haja uma organização para este projeto crie uma! Clique em <a href="{{ url_for('orgcreate') }}"<b>Nova Organização.</b></a></p>
+            <p></p>
+            <p>O projeto precisa ter um <em>Responsável</em>.
+            Ele precisa ser um usuário já cadastrado aqui no "vamostrabalharjuntos.com.br" e ser membro da <em>Organização</em>.
+            <p>Uma lista de usuários que são membros da <em>Organização</em> é apresentada.</p>
+            <p>Após a criação do projeto, somente este <em>Responsável</em> poderá alterar dados gerais do projeto e criar tarefas.</p>
+            <p></p>
+            <p>Defina seu projeto como Público,Privado ou Secreto</p>
+            <il>Projetos Públicos podem ser vistos por qualquer pessoa.</il>
+            <il>Projetos Privados podem ser vistos apenas pela organização.</il>
+            <il>Projetos Secretos só podem ser vistos por alguns usuários selecionados</il>
+            </p><p>
+            </p>Escolha um <em>Icone</em> para representar seu projeto.
+            <p></p>
+            <p>Basta clicar em <b> </b> para criar seu projeto</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+  
+  <script>
+    function set_avatar(avat_id,avat_url){
+      console.log("id:"+avat_id);
+      if (avat_id=='photoicon') {
+        avat_id2 = document.getElementById("photoicon").getAttribute("id2");
+        console.log("id2:"+avat_id2);
+        avat_url2 = document.getElementById("photoicon").src;
+        document.getElementById("avatar").value=avat_id2;
+        document.getElementById('image1').style.backgroundImage="url("+avat_url2+")";
+      }
+      else {
+      document.getElementById("avatar").value=avat_id;
+      console.log("background-imager:"+avat_url);
+      document.getElementById('image1').style.backgroundImage="url("+avat_url+")";
+      };
+    };
+    //console.log('script carregado')
+  </script>
+  
+  {% include "upload-scripts-body2.html" %}
+  
+{% endblock %}

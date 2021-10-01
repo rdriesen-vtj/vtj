@@ -1,0 +1,118 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  <style>
+    #image1{
+      background-image: url({{ icon_url }});
+    }
+  </style>
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="page type-page status-publish hentry">
+          <div class="content">
+            <div id="right-sidebar-inner" class="b">
+              <div class="wp-block-image">
+                <div class="prancheta form-group " id="imagers" >
+                </div>
+                <table style="padding: 0px">
+                  <tr style="padding: 0px" >
+                    <td rowspan=3 style="width: 150; padding: 0px" align="left" >
+                      <div id="image1" class="cropcircle"></div>
+                    </td>
+                    <td col span=2 valign="bottom" class="has-huge-font-size" style="padding: 0px 0px 0px 20px">
+                      {{ nome }} {{ sobrenome }}
+                    </td>
+                  </tr>
+                  <tr style="padding: 0px">
+                    <td colspan=3 valign="top" class="has-medium-font-size" style="padding: 0px 0px 0px 20px">
+                      <i id="username">{{ username }}</i>
+                    </td>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr style="padding: 15px">
+                    <td colspan=2>
+                      Escolha um dos avatares abaixo
+                    </td>
+                    <td align="center">
+                      faça upload de uma foto.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=2 style="padding: 0px" id="icon_list">
+                      {% for icon in icons %}
+                        <img id="{{ icon.id }}" src="{{ icon.icon_url }}" alt="{{ icon.icon_name }}" width="32" height="32"
+                             style="display:inline" onclick="set_avatar('{{ icon.id }}','{{ icon.icon_url }}')"/>
+                      {% if loop.index is divisibleby 10 %}<br>{% endif %}
+                    {% endfor %}
+                        
+                    </td>
+                    <td align="center" valign="top" style="padding: 0px">
+                      <div>
+                        <img id="photoicon" id2="{{ photoicon.id }}" src="{{ photoicon.icon_url }}" alt="" width="64" height="64" style="vertical-align: middle; display:inline"
+                             onclick="set_avatar(this.id,this.src)"/>
+                        &nbsp; &nbsp; 
+                        <button class="button" id="upload" style="vertical-align: middle; display: inline;" onclick="addNew()">Upload</button><br>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <form action="" method="post" >
+                {{ form.hidden_tag() }}
+                <div style="display:none">
+                  {{ form.avatar(size=5, id="avatar", value=avatar) }}
+                </div>
+                <div class="button">
+                  {{ form.submit(class_="button") }}<br>
+                </div>
+
+              </form>
+            </div>  
+          </div><!-- .content -->
+        </div>  
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+    		<div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">Crie seu Login.</h4>
+          <div class="textwidget">
+            <p>A imagem que aparece é o seu "avatar".</p>
+            <p>Escolha um dentre os que estão disponíveis clicando na miniatura.</p>
+            <p>Se preferir, envie a sua própria imagem clicando em <b>UPLOAD</b></p>
+            <p>Carregue sua imagem usando o <b>Browser...</b> que aparecerá.</p>
+            <p>Neste caso é possível editar a imagem ampliando, cortando ou girando.</p>
+            <div style="display:inline-block">
+              Clique no icone <img src="https://vamostrabalharjuntos.com.br/projetos/static/disquete.png" style="display:inline-block"> para salvar.
+            </div>
+            <p>Agora é só clicar em <b>Registrar</b> para terminar o registro e usar seu acesso</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+   
+  <script>
+    function set_avatar(avat_id,avat_url){
+      console.log("id:"+avat_id);
+      if (avat_id=='photoicon') {
+        avat_id2 = document.getElementById("photoicon").getAttribute("id2");
+        console.log("id2:"+avat_id2);
+        avat_url2 = document.getElementById("photoicon").src;
+        document.getElementById("avatar").value=avat_id2;
+        document.getElementById('image1').style.backgroundImage="url("+avat_url2+")";
+      }
+      else {
+      document.getElementById("avatar").value=avat_id;
+      console.log("background-imager:"+avat_url);
+      document.getElementById('image1').style.backgroundImage="url("+avat_url+")";
+      };
+    };
+    //console.log('script carregado')
+  </script>
+  
+  {% include "upload-scripts-body.html" %}
+  
+{% endblock %}

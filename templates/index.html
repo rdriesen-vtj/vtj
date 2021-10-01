@@ -1,0 +1,115 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  <main class="wrapper" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="page projeto"> <!-- page hentry -->
+          <div class="content">
+            <div id="right-sidebar-inner" class="b">
+              <h1>Olá, {{ current_user.nome }}!</h1>
+              <p>Ter você aqui é incrivel! Seja Bem-vindo.</p>
+              <p>{{ moment(hora).format('LLL') }}</p>
+              {% if (newmsgs|length == 0) %}
+                <p> Nenhuma mensagem nova. </p>
+              {% else %}
+                <p>{{ newmsgs|length }} mensagens novas:</p>
+                {% for m in newmsgs %}
+                  {% if m.msg.origin_id != user.id %}
+                  <section>
+                    <div style="padding: 0px 40px 0px 0px">
+                    <table style="padding: 0px 40px 0px 0px">
+                      <tr>
+                        <td rowspan = 2 style="width: 40px; padding: 0px; background-color: #dddddd">
+                          <div style="background-image: url({{ m.msg.origin.avatar.icon_url }}" class="usercropcircle"></div> 
+                        </td>
+                        <td style="padding: 0px 10px 0px; text-align:left; background-color: #dddddd">
+                          {{ m.msg.origin.nome }} {{ m.msg.origin.sobrenome }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan=2 style="padding: 0px 10px 0px; font-size:13px; text-align:left; background-color: #dddddd">
+                          {{ moment(m.msg.timestamp).fromNow(refresh=True) }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan=2 style="padding: 5px 20px 10px; background-color: #dddddd">
+                          
+                            {% set lines = m.msg.body.split('\n') %}
+                            {% for line in lines %}
+                              {{ line }}<br>
+                            {% endfor %}
+                          
+                        </td>
+                      </tr>
+                    </table>
+                    </div>
+                    <div class="reply">
+                      <a href="http://vamostrabalharjuntos.com.br/projetos/replymsg/{{ m.msg.id }}">
+                        <img src="https://vamostrabalharjuntos.com.br/projetos/static/reply-512.png" class="star" alt="reply" title="reply"/>
+                      </a>
+                    </div>
+                  </section>  
+                  {% else %}
+                    <div style="padding: 0px 0px 0px 40px">
+                    <table style="padding: 0px 0px 0px 40px">
+                      <tr>
+                        <td colspan=2 style="padding: 0px 10px 0px; text-align:right; background-color: #b5e7a0">
+                          {{ user.nome }} {{ user.sobrenome }}
+                        </td>
+                        <td rowspan = 2 style="width: 40px; padding: 0px; background-color: #b5e7a0">
+                          <div style="background-image: url({{ m.user.avatar.icon_url }}" class="usercropcircle"></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0px 10px 0px; font-size:13px;  text-align:left; background-color: #b5e7a0">
+                          Para:
+                          {% set i = loop.index %}
+                          {% for d in m.msg.users %}
+                            {% if d.user.id != current_user.id %}
+                              {{ d.user.nome }}
+                              {% if (loop.index) < m.msg.users|length %}
+                                ,&nbsp;
+                              {% endif %}
+                            {% endif %}
+                          {% endfor %}
+                        </td>
+                        <td style="padding: 0px 10px 0px; font-size:13px;  text-align:right; background-color: #b5e7a0">
+                            {{ moment(m.msg.timestamp).fromNow(refresh=True) }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan=3 style="padding: 5px 20px 10px; background-color: #b5e7a0">
+                            {% set lines = m.msg.body.split('\n') %}
+                            {% for line in lines %}
+                              {{ line }}<br>
+                            {% endfor %}
+                        </td>
+                      </tr>
+                    </table>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              <p><a href="http://vamostrabalharjuntos.com.br/projetos/messages">Ver todas as mensagens.</a></p>
+            </div>  
+          </div><!-- .content -->
+        </div><!-- .Post -->
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+      
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+    		<div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">ÁREA DE TRABALHO</h4>
+          <div class="textwidget">
+            <b>Página Inicial da Área de Trabalho</b>
+            <p></p>
+            <p>Você está logado. A partir daqui é possível acessar os projetos e suas tarefas.</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+{% endblock %}
+

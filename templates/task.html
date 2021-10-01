@@ -1,0 +1,152 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  <style>
+    #image1{
+      background-image: url({{ projeto.logo.icon_url }});
+    }
+    .star-progress {
+      width: 180px;
+      height: auto;
+    }
+    .respcropcircle{
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background: #eee no-repeat center;
+      background-size: cover;
+    }
+    .projcropcircle{
+      width: 150px;
+      height: 150px;
+      border-radius: 100%;
+      background: #eee no-repeat center;
+      background-size: cover;
+    }
+    select {
+      width: 210px;
+    }
+    table, th, td {
+      border: 0px solid black;
+      padding: padding: 0px 0px 0px 20px;
+      align="left";
+    }
+  </style>
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="content">
+          <div id="right-sidebar-inner" class="b">
+            <table>
+              <tr>
+                <td rowspan=1 style="width: 150px; padding: 0px">
+                  <a href="http://vamostrabalharjuntos.com.br/projetos/projeto/{{ projeto.id }}">
+                  <div id="image1" class="projcropcircle" ></div></a>
+                </td>
+                <td colspan=1 valign="center" class="has-huge-font-size" style="padding: 0px 0px 0px 20px">
+                  {{ projeto.titulo }}
+                </td>
+              </tr>
+            </table>
+            <table>
+              <tr>
+                {% if tarefa.responsavel_id == 0 %}
+                <td style="width: 180px; padding: 0px 5px">
+                  <img class="star-progress" src="https://vamostrabalharjuntos.com.br/projetos/static/images/star-progress-gray.png" alt="">
+                </td>
+                <td style="padding: 0px 5px" class="has-large-font-size">
+                  {{tarefa.progresso}}%
+                </td>
+                <td style="padding: 0px; color:#FF0000" align="left">
+                  - Tarefa ainda não atribuida
+                </td>
+                {% else %}  
+                <td style="width: 180px; padding: 0px 5px">
+                  <img class="star-progress" src="https://vamostrabalharjuntos.com.br/projetos/static/images/star{{tarefa.progresso}}.png" alt="">
+                </td>
+                <td colspan=2 style="padding: 0px 5px" class="has-large-font-size">
+                  {{tarefa.progresso}}%
+                </td>
+              {% endif %}
+              </tr>
+            </table>
+            <table>
+              <tr>
+                <td colspan=3 style="padding: 10px 0px 0px 20px">
+                  Tarefa:
+                </td>
+              </tr>
+              <tr>
+                <td colspan=3 style="padding: 0px 0px 5px 40px">
+                  {{ tarefa.titulo }}
+                </td>
+              </tr>
+              <tr>
+                <td colspan=3 style="padding: 10px 0px 5px 20px">
+                  Descrição:
+                </td>
+              </tr> 
+              <tr>
+                <td colspan=3 style="padding: 0px 0px 5px 40px">
+                  {% for desc in descricao %}
+                   &nbsp;&nbsp;{{ desc }}<br>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td colspan=3 style="padding: 10px 0px 5px 20px">
+                  Responsável:
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 0px 0px 5px 40px">
+                  <a href="http://vamostrabalharjuntos.com.br/projetos/user/{{ responsavel.username }}">
+                  <div id="avatar" style="background-image: url({{ responsavel.avatar.icon_url }}" class="respcropcircle"></div>
+                  </a>
+                </td>
+                <td colspan=2 style="padding: 0px 5px ; width:100%">
+                  <a href="http://vamostrabalharjuntos.com.br/projetos/user/{{ responsavel.username }}">
+                  {{ responsavel.nome }} {{ responsavel.sobrenome }}
+                  </a><br>
+                  <a href="http://vamostrabalharjuntos.com.br/projetos/newmsg/{{ responsavel.id }}">
+                  Enviar Mensagem
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan=3 style="padding: 10px 0px 5px 20px">
+                  Status:
+                </td>
+              </tr>
+              <tr>
+                <td colspan=3 style="padding: 0px 0px 5px 40px">
+                  {{ tarefa.status }}
+                </td>
+              </tr>
+              {% if (tarefa.responsavel.id == current_user.id or projeto.responsavel.id == current_user.id)  %}
+              <tr>
+                <td colspan=3>
+                  <a class="button-right" href="https://vamostrabalharjuntos.com.br/projetos/edittask/{{ projeto.id }}/{{ tarefa.id }}"">EDITAR</a>
+                </td>
+              </tr>
+              {% endif %}
+            </table>
+          </div><!-- .right-sidebar-inner --> 
+        </div><!-- .content --> 
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title"Tarefa</h4>
+          <div class="textwidget">
+            <p>Esta é uma ação parte de um projeto.</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+  
+  {% include "upload-scripts-body.html" %}
+  
+{% endblock %}

@@ -1,0 +1,126 @@
+<script>
+    function removeElement(elementId) {
+        // Removes an element from the document
+        var element = document.getElementById(elementId);
+        element.parentNode.removeChild(element);
+    };
+
+    var pluginsConfig = {
+      Crop: {
+        controlsCss: {
+          width: '15px',
+          height: '15px',
+          background: 'white',
+          border: '1px solid black'
+        },
+        controlsTouchCss: {
+          width: '25px',
+          height: '25px',
+          background: 'white',
+          border: '2px solid black'
+        }
+      },
+      Save: {
+        upload: true,
+        uploadFunction: function (imageId, imageData, callback) {
+          var imager = this;
+          //console.log('uploading ' + imageId);
+          var imageType = ".jpg";
+          if (imageData.includes(".gif")) {
+            var imageType = ".gif"; 
+          };
+          if (imageData.includes(".png")) {
+            var imageType = ".png"; 
+          };
+          var data = imageData.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+          username = document.getElementById("username").innerHTML
+          //console.log("username: "+username);
+          var dataJson = {
+            "imageId": imageId,
+            "imageData": data,
+            "imageType": imageType,
+            "username":username,
+            "icon_name":icon_name,
+            "tipo":tipo
+          };
+          console.log("checkpoint 1");
+          $.ajax({
+            url: '/var/www/projetos/save',
+            //dataType: 'json',
+            data: JSON.stringify(dataJson),
+            contentType: 'application/json; charset=utf-8',
+            type: 'POST',
+            success: function(resposta) {
+              imageUrl = resposta.url;
+              avatar_id = resposta.id;
+              console.log('avatar_id:'+avatar_id);
+              callback(imageUrl); // assuming that server returns an `imageUrl` as a response
+              console.log('uploading success: ' + imageUrl);
+              //console.log("background-imager:"+avat.src);
+              document.getElementById('image1').style.backgroundImage="url("+imageUrl+")";
+              document.getElementById("imagers").style = "display: none";
+              document.getElementById("avatar").value=avatar_id;
+              //list = document.getElementById("icon_list").innerHTML;
+              //new_icon = '<img id="'+avatar_id +'" src="'+ imageUrl + '" alt="new" width="32" height="32" style="display:inline" onclick="set_avatar(this)"/>';
+              //document.getElementById("icon_list").innerHTML = list + new_icon;
+              document.getElementById("photoicon").src = imageUrl;
+              document.getElementById("photoicon").setAttribute("id2", avatar_id);
+              document.getElementById("upload").style = "display: inline";
+              document.getElementById("logo_url").value = imageUrl;
+              removeElement("imager_id");
+            },
+            error: function (xhr, status, error) {
+                console.log(status);
+                console.log(error);
+            }
+          });
+        }
+      }      
+    };
+    var options = {
+      plugins: ['Rotate', 'Crop', 'Resize', 'Toolbar', 'Save', 'Delete', 'Undo'],
+      editModeCss: {
+      },
+      pluginsConfig: pluginsConfig,
+      quality: {
+        sizes: [
+          { label: 'Original', scale: 1, quality: 1, percentage: 100 },
+          { label: 'Large', scale: 0.5, quality: 0.5, percentage: 50 },
+          { label: 'Medium', scale: 0.2, quality: 0.2, percentage: 20 },
+          { label: 'Small', scale: 0.05, quality: 0.05, percentage: 5 }
+        ]
+      }
+    };
+ 
+
+ 
+    var addNew = function (t,n) {
+      tipo = t;
+      icon_name = n;
+      console.log("tipo: "+tipo+" icon_name: "+icon_name);
+      var $imageContainer = $(
+              '<div class="image-container" id="imager_id" style="position: relative; display: inline-block">' +
+              '  <img class="imager-test" ' +
+              '       src="" ' +
+              '       style="min-width: 300px; min-height: 200px; width: 300px;">' +
+              '</div>');
+      document.getElementById("imagers").style = "display: inline";
+      document.getElementById("upload").style = "display: none";
+
+      $('#imagers').append($imageContainer);
+      var imager = new ImagerJs.Imager($imageContainer.find('img'), options);
+      imager.startSelector();
+      imager.on('editStart', function () {
+        imager.$imageElement.css({
+          minWidth: 'auto',
+          minHeight: 'auto'
+        });
+        var qualitySelector = new window.ImagerQualitySelector(imager, options.quality);
+        var qualityContainer = $('<div class="imager-quality-standalone"></div>');
+        qualityContainer.append(qualitySelector.getElement());
+        imager.$editContainer.append(qualityContainer);
+        qualitySelector.show();
+        qualitySelector.update();
+      });
+    };  
+</script>

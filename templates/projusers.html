@@ -1,0 +1,211 @@
+{% extends "base3.html" %}
+
+{% block content %}
+  <style>
+    #image1{
+      background-image: url({{ projeto.logo.icon_url }});
+    }
+    table, th, td {
+      border: 0px solid black;
+      padding: padding: 0px 0px 0px 20px;
+      align="left";
+    }
+    
+    input[type="text"], input[type="password"], textarea, select {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: gray;
+    display: inline-block;
+    font-size: 13px;
+    height: 85px;
+    padding: 2px;
+    width: 210px;
+}
+  </style>
+<body> 
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="papel">
+          <div class="content">
+            <div id="right-sidebar-inner" class="b projeto">
+              <div class="wp-block-image">
+                <div class="prancheta form-group " id="imagers" >
+                </div>
+                <table style="padding: 0px">
+                  <tr style="padding: 0px" >
+                    {% if big %}
+                      <td style="width: 90px; height: auto; padding: 0px" align="left" >
+                        <div id="image1" class="cropcircle">
+                          <a href="https://vamostrabalharjuntos.com.br/projetos/projeto/{{ projeto.id }}" style="display:inline-block; width:100%; height:100%;"></a>
+                        </div>
+                      </td>
+                      <td valign="center" class="has-big-font-size" style="padding: 0px 0px 0px 15px">
+                        {{ projeto.titulo }} 
+                      </td>
+                    {% else %}
+                      <td style="width: 120px; height: auto; padding: 0px" align="left" >
+                        <div id="image1" class="cropcircle">
+                          <a href="https://vamostrabalharjuntos.com.br/projetos/projeto/{{ projeto.id }}" style="display:inline-block; width:100%; height:100%;"></a>
+                        </div>
+                      </td>
+                      <td valign="center" class="has-huge-font-size" style="padding: 0px 0px 0px 20px">
+                        {{ projeto.titulo }} 
+                      </td>
+                    {% endif %}
+                  </tr>
+                  <tr>
+                    <td colspan=2 class="has-large-font-size">
+                      PARTICIPANTES
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan=2 class="has-small-font-size" align="left">
+                      responsável: {{ projeto.responsavel.nome }} {{ projeto.responsavel.sobrenome }}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <form action="" method = "POST">
+                {{ form.hidden_tag() }}
+                Incluir participante:<br>
+                {% if form.incluidos.choices|length > 0: %}               
+                <table>
+                  <tr>
+                    <td style="width: 100px; padding: 0px 0px 0px 10px" align="left" >
+                      {{ form.incluidos.label }}<br>
+                      {{ form.incluidos(size=8, value=value, width=150) }}
+                      {% for error in form.incluidos.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}  
+                    </td> 
+                  <tr>    
+                </table>
+                {% else %}
+                Não existem outros membros na organização para incluir no Projeto.<br>
+                {% endif %} 
+                <br>
+                Excluir participante:<br>
+                {% if form.excluidos.choices|length > 0: %}
+                <table>
+                  <tr>
+                    <td style="width: 100px; padding: 0px 0px 0px 10px" align="left" >
+                      {{ form.excluidos.label }}<br>
+                      {{ form.excluidos(size=8, value=value, width=150) }}
+                      {% for error in form.excluidos.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}  
+                    </td> 
+                  <tr>    
+                </table>
+                {% else %}
+                Não existem participantes no Projeto além de você.<br>
+                {% endif %}
+                <br>
+                Editar status de participante:<br>
+                {% if form.editados.choices|length > 0 or form.editadosresp.choices|length > 0 : %}
+                <table>
+                  {% if user_status == 'responsável' %}
+                  <tr>
+                    <td>
+                      {{ form.statusresp.label }}{{ form.statusresp }}<br>
+                      {% for error in form.statusresp.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}
+                    </td>  
+                  </tr>
+                  <tr>
+                    <td style="width: 100px; padding: 0px 0px 0px 10px" align="left" >
+                      {{ form.editadosresp.label }}<br>
+                      {{ form.editadosresp(size=8, value=value, width=150) }}
+                      {% for error in form.editadosresp.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}  
+                    </td> 
+                  <tr>  
+                  {% else %}
+                  <tr>
+                    <td>
+                      {{ form.status.label }}{{ form.status }}<br>
+                        {% for error in form.status.errors %}
+                          <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </td>  
+                  </tr>
+                  <tr>
+                    <td style="width: 100px; padding: 0px 0px 0px 10px" align="left" >
+                      {{ form.editados.label }}<br>
+                      {{ form.editados(size=8, value=value, width=150) }}
+                      {% for error in form.editados.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                      {% endfor %}  
+                    </td> 
+                  <tr>
+                  {% endif %}  
+                </table>
+                {% else %}
+                Não existem participantes no Projeto além de você.<br>
+              {% endif %}
+              {% if (form.excluidos.choices|length > 0) or (form.incluidos.choices|length > 0):%}
+                <div class="button">
+                <br>{{ form.submit(class_="button") }}<br>
+                </div>
+              {% endif %}  
+              </form>
+            </div>  
+          </div><!-- .content -->
+        </div><!-- .paper -->
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">Inclusão e Exclusão de participantes.</h4>
+          <div class="textwidget">
+            <p>Apenas membros com status administrador ou responsável do projeto tem acesso a esta página.
+            <p></p>
+            <p>Para incluir um novo participante no projeto ele precisa ser um membro da organização do projeto.</p>
+            <p>Escolha um ou mais participantes da lista.</p>
+            <p></p>
+            <p>Para excluir um participante do projeto, procure-o na lista de participantes atuais apresentada.</p>
+            <p>A lista mostra todos os participantes atuais.</p>
+            <p></p>
+            <p>Os membros pussuem os status:</p>
+            <p>&bull; <b>participante</b> = Pode ver os dados e receber tarefas. </p>
+            <p>&bull; <b>editor</b> = Pode tudo que o participante faz e pode editar os dados e carregar imagens. </p>
+            <p>&bull; <b>administrador</b> = Pode tudo que o editor faz e pode mudar descrição, gerenciar membros (incluir/excluir/alterar status). </p>
+            <p>&bull; <b>responsável</b> = Pode tudo que o administrador faz e pode mudar o status do projeto (inclusive deleta-lo). </p>
+            <p></p>
+            <p>O membro com status de <em>Responsável</em> é único e seu status só pode ser repassado pelo próprio <em>Responsável</em></p>
+            <p>Para editar a função de um membro no projeto, selecione o status que deseja atribuir e os membros na terceira lista de membros.</p>
+            <p>A lista mostra os status atuais dos participantes.</p>
+            <p></p>
+            <p>Agora basta clicar em <b>SUBMETER</b> para atualizar os participantes de seu projeto.</p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+  
+  <script>
+    function set_avatar(avat_id,avat_url){
+      console.log("id:"+avat_id);
+      if (avat_id=='photoicon') {
+        avat_id2 = document.getElementById("photoicon").getAttribute("id2");
+        console.log("id2:"+avat_id2);
+        avat_url2 = document.getElementById("photoicon").src;
+        document.getElementById("avatar").value=avat_id2;
+        document.getElementById('image1').style.backgroundImage="url("+avat_url2+")";
+      }
+      else {
+      document.getElementById("avatar").value=avat_id;
+      console.log("background-imager:"+avat_url);
+      document.getElementById('image1').style.backgroundImage="url("+avat_url+")";
+      };
+    };
+    //console.log('script carregado')
+  </script>
+  
+  {% include "upload-scripts-body.html" %}
+  
+{% endblock %}

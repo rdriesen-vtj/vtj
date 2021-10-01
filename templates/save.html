@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+  <main class="wrapper" id="site-content" role="main">
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="page type-page status-publish hentry">
+          <div class="content">
+            <div id="right-sidebar-inner" class="b">
+              <p class="has-huge-font-size">IMAGEM SALVA</p>
+              <figure class="alignleft size-large">
+                <img id="img" src="{{ url }}" alt="{{ url }}" />
+              </figure>
+                <p></p>
+                <p>arquivo: {{ arquivo }}</p>
+            </div>
+          </div><!-- .content -->
+        </div>  
+      </div><!-- .content-inner -->
+    </div><!-- .content-area -->
+    
+    
+    <aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary">
+      <div id="right-sidebar-inner" class="clr">
+        <div id="text-3" class="sidebar-box widget_text clr">
+          <h4 class="widget-title">Imagem</h4>
+          <div class="textwidget">
+            <p>imagem editada</p>
+            <p></p>
+          </div>
+        </div>
+      </div><!-- #sidebar-inner -->
+    </aside><!-- #right-sidebar -->
+  </main>
+{% endblock %}
